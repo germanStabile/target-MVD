@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { blackColor } from '../../../constants/styleConstants';
+
 const styles = StyleSheet.create({
   input: {
     flex: 1,
@@ -10,7 +12,7 @@ const styles = StyleSheet.create({
     width: 188,
     minHeight: 37,
     borderWidth: 0.5,
-    borderColor: 'black',
+    borderColor: blackColor,
   },
   labelContainer: {
     alignItems: 'center'
