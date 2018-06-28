@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, Alert} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 
-import CreateAccountForm from '../../components/login/CreateAccountForm'
+import CreateAccountForm from '../../components/login/CreateAccountForm';
+import styles from './styles';
 
 class CreateAccountScreen extends React.Component {
 
@@ -26,9 +27,3 @@ class CreateAccountScreen extends React.Component {
 }
 
 export default CreateAccountScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

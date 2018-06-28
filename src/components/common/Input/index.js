@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, object, bool } from 'prop-types';
 import { View, TextInput, Text } from 'react-native';
 
-import styles from './styles'
+import styles from './styles';
 
 const Input = ({ input: { onChange, ...restInput }, password = false, label, meta: { touched, error }}) => (
   <View>
@@ -22,8 +22,6 @@ const Input = ({ input: { onChange, ...restInput }, password = false, label, met
     </View>
   </View>
 );
-
-const { string, object, bool } = PropTypes;
 
 Input.propTypes = {
   input: object.isRequired,

@@ -1,5 +1,7 @@
 import React from 'react';
-import {Text, View, Button, StyleSheet} from 'react-native';
+import { Text, View, Button } from 'react-native';
+
+import styles from './styles';
 
 class LoginScreen extends React.Component {
 
@@ -23,16 +25,3 @@ class LoginScreen extends React.Component {
 }
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  redText: {
-    color: 'red',
-    fontSize: 20,
-  }
-
-});

@@ -1,10 +1,8 @@
-import {StyleSheet} from 'react-native';
-
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
     flex: 1,
-    backgroundColor: '#ffffff',
     textAlign:'center'
   },
   inputContainer: {
