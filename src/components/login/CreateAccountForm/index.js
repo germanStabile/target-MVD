@@ -1,26 +1,45 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ScrollView } from 'react-native';
 
 import Input from '../../common/Input';
 import styles from './styles';
+import { validations, createAccount } from '../../../utils/constraints';
+import PickerInput from '../../common/PickerInput';
 
 const CreateAccountForm = ({ handleSubmit, error }) => (
   <View onSubmit={handleSubmit} style={styles.container}>
-    <Field
-      name= "Email"
-      label= "Email"
-      component= {Input} />
-    <Field
-      name= "Password"
-      label= "Password"
-      component= {Input} />
-    <Field
-      name= "Confirm Password"
-      label= "Confirm Password"
-      component= {Input} />
-    <Button title="Sign up" onPress={handleSubmit} />
+    {error && <Text>{error}</Text>}
+      <Field
+        name= "name"
+        label= "NAME"
+        component= {Input} />
+      <Field
+        name= "email"
+        label= "EMAIL"
+        component= {Input} />
+      <Field
+        name= "password"
+        label= "PASSWORD"
+        component= {Input}
+        password />
+      <Field
+        name= "confirmPassword"
+        label= "CONFIRM PASSWORD"
+        component= {Input}
+        password />
+      <Field
+        name="gender"
+        component= {PickerInput}
+        mode="dropdown"
+        children = { [
+          { label:"Male", value:"male" },
+          { label:"Female", value:"female" },
+          { label:"Other", value:"other" }]
+        } >
+      </Field>
+      <Button title="SIGN UP" onPress={handleSubmit} />
   </View>
 );
 
@@ -30,5 +49,6 @@ CreateAccountForm.propTypes = {
 };
 
 export default reduxForm({
-  form: 'createAccount'
+  form: 'createAccount',
+  validate: validations(createAccount)
 })(CreateAccountForm);

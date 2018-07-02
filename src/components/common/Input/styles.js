@@ -1,21 +1,35 @@
 import { StyleSheet } from 'react-native';
 
-import { blackColor } from '../../../constants/styleConstants';
+import { blackColor, redColor } from '../../../constants/styleConstants';
 
 const styles = StyleSheet.create({
   input: {
     flex: 1,
-    textAlign:'center'
+    textAlign:'center',
+    backgroundColor: 'transparent'
   },
   inputContainer: {
-    marginBottom: 24,
     width: 188,
     minHeight: 37,
     borderWidth: 0.5,
     borderColor: blackColor,
+    backgroundColor: 'transparent'
+  },
+  errorInputContainer: {
+    borderColor: redColor,
+    backgroundColor: 'transparent'
+  },
+  inputErrorLabelContainer: {
+    marginBottom: 24,
+    alignItems: 'center',
+    backgroundColor: 'transparent'
   },
   labelContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent'
+  },
+  errorText: {
+    color: redColor
   }
 });
 

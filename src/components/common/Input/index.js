@@ -6,11 +6,11 @@ import styles from './styles';
 
 const Input = ({ input: { onChange, ...restInput }, password = false, label, meta: { touched, error }}) => (
   <View>
-    <View style= {styles.labelContainer}>
+    <View style={styles.labelContainer}>
       {label && <Text>{label}</Text>}
     </View>
-    <View>
-      <View style={styles.inputContainer}>
+    <View style={styles.inputErrorLabelContainer}>
+      <View style={[styles.inputContainer, touched && error ? styles.errorInputContainer : {}]}>
         <TextInput
           style={styles.input}
           onChangeText={onChange}
@@ -18,7 +18,7 @@ const Input = ({ input: { onChange, ...restInput }, password = false, label, met
           {...restInput}
         />
         </View>
-      {touched && error && <Text>{error}</Text>}
+        {touched && error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   </View>
 );

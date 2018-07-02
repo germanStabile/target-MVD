@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, Alert} from 'react-native';
+import { View, Text, Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import CreateAccountForm from '../../components/login/CreateAccountForm';
 import styles from './styles';
+import Header from '../../components/common/Header';
 
 class CreateAccountScreen extends React.Component {
 
@@ -15,13 +17,16 @@ class CreateAccountScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <CreateAccountForm onSubmit={this.handleSubmit}/>
+        <KeyboardAwareScrollView>
+          <Header style={styles.header}/>
+          <CreateAccountForm onSubmit={this.handleSubmit}/>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
 
-  handleSubmit() {
-    Alert.alert("Submit tapped", "awesome right?")
+  handleSubmit = values => {
+    Alert.alert("Submit tapped", JSON.stringify(values));
   }
 
 }

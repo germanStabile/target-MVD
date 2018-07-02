@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Button } from 'react-native';
 
 import styles from './styles';
+import Header from '../../components/common/Header';
 
 class LoginScreen extends React.Component {
 
@@ -13,8 +14,11 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.redText}>This is the login screen</Text>
-        <Button title="Sign up" onPress={this.onSignUpButtonPressed}/>
+        <Header style={styles.header}/>
+        <View style={styles.formContainer}>
+          <Text style={styles.redText}>This is the login screen</Text>
+          <Button title="Sign up" onPress={this.onSignUpButtonPressed}/>
+        </View>
       </View>
     );
   }

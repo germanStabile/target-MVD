@@ -10,18 +10,32 @@ export const login = {
   }
 };
 
-export const signup = {
+export const createAccount = {
+  name: {
+    presence: { message: "you forgot to put your name" }
+  },
   email: {
-    presence: true,
-    email: true
+    presence: { message: "oops, this email is not valid" },
+    email: { message: "oops, this email is not valid" }
   },
   password: {
-    presence: true
+    presence: { message: "the password must be 6 characters long" },
+    length: {
+      minimum: 6,
+      message : "the password must be 6 characters long"
+    }
   },
-  name: {
-    presence: true
+  confirmPassword: {
+    presence: true,
+    equality: {
+      attribute: "password",
+      message: "passwords don't match"
+    }
+  },
+  gender: {
+    presence: { message: "you forgot to select your gender" }
   }
 };
 
 export const validations = constraints =>
-  data => validate(data.toJS(), constraints) || {};
+  data => validate(data.toJS(), constraints, { fullMessages:false }) || {};
