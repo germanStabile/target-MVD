@@ -1,5 +1,5 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import { func, string, array, bool } from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { View, Text, Button, ScrollView } from 'react-native';
 
@@ -8,8 +8,8 @@ import styles from './styles';
 import { validations, createAccount } from '../../../utils/constraints';
 import PickerInput from '../../common/PickerInput';
 
-const CreateAccountForm = ({ handleSubmit, error }) => (
-  <View onSubmit={handleSubmit} style={styles.container}>
+const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => (
+  <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
     {error && <Text>{error}</Text>}
       <Field
         name= "name"
@@ -41,7 +41,8 @@ const CreateAccountForm = ({ handleSubmit, error }) => (
 
 CreateAccountForm.propTypes = {
   handleSubmit: func.isRequired,
-  error: string
+  error: string,
+  containerStyle: array,
 };
 
 export default reduxForm({
