@@ -30,15 +30,11 @@ const CreateAccountForm = ({ handleSubmit, error }) => (
         component= {Input}
         password />
       <Field
-        name="gender"
+        name= "gender"
+        label= "GENDER"
         component= {PickerInput}
-        mode="dropdown"
-        children = { [
-          { label:"Male", value:"male" },
-          { label:"Female", value:"female" },
-          { label:"Other", value:"other" }]
-        } >
-      </Field>
+        labels={["Male", "Female", "Other"]}
+        values={["male", "female", "other"]} />
       <Button title="SIGN UP" onPress={handleSubmit} />
   </View>
 );
