@@ -12,9 +12,8 @@ const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => {
   console.log("are we getting an error or what", error);
   return (
   <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
-    {error && <Text>{error}</Text>}
       <Field
-        name= "name"
+        name= "username"
         label= "NAME"
         component= {Input} />
       <Field
@@ -27,7 +26,7 @@ const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => {
         component= {Input}
         password />
       <Field
-        name= "confirmPassword"
+        name= "password_confirmation"
         label= "CONFIRM PASSWORD"
         component= {Input}
         password />
@@ -37,6 +36,7 @@ const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => {
         component= {PickerInput}
         labels={["Male", "Female", "Other"]}
         values={["male", "female", "other"]} />
+        {error && <Text style={styles.errorText}>{error}</Text>}
       <Button title="SIGN UP" onPress={handleSubmit} />
   </View>
 ); }

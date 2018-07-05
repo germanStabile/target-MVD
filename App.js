@@ -18,8 +18,6 @@ class App {
   }
 
   onStoreUpdate() {
-    const session = store.getState().get('session');
-    console.log("Session:", session);
     if (!this.appInitialized) {
       this.appInitialized = true;
       Navigation.startSingleScreenApp({

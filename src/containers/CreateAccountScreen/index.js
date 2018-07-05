@@ -34,7 +34,14 @@ class CreateAccountScreen extends React.Component {
   }
 
   handleSubmit = values => {
-    this.props.signUp(values.toJS());
+    this.setState({ isLoading: true });
+    return this.props.signUp(values.toJS()).then(resp => {
+      this.setState({ isLoading: false });
+      this.props.navigator.push({screen:"target.LoggedInScreen"});
+    }).catch(err => {
+      this.setState({ isLoading: false });
+      throw new SubmissionError({_error:err});
+    });
   }
 }
 

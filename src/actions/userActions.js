@@ -12,13 +12,9 @@ export const signUpSuccess = () => ({
     type: types.SIGN_UP_ERROR
     });
 
-export const signUp = user =>
-  dispatch =>
-  userApi.signUp({ user }).then( response => {
-       console.log("Success?", response);
-   }).catch( err => {
-      console.log("we fall in the catch and will throw the submission error");
-       throw new SubmissionError({
-         _error: err.error,
-       });
-  });
+export const signUp = user => dispatch =>
+  userApi.signUp({ user }).then(response => {
+    sessionService.saveUser(response);
+  }).catch(error => {
+    throw error;
+  })

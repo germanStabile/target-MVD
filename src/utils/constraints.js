@@ -11,7 +11,7 @@ export const login = {
 };
 
 export const createAccount = {
-  name: {
+  username: {
     presence: { message: "you forgot to put your name" }
   },
   email: {
@@ -19,13 +19,13 @@ export const createAccount = {
     email: { message: "oops, this email is not valid" }
   },
   password: {
-    presence: { message: "the password must be 6 characters long" },
+    presence: { message: "the password must be 8 characters long" },
     length: {
-      minimum: 6,
+      minimum: 8,
       message : "the password must be 6 characters long"
     }
   },
-  confirmPassword: {
+  password_confirmation: {
     presence: true,
     equality: {
       attribute: "password",
