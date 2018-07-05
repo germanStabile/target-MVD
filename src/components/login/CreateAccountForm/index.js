@@ -8,7 +8,9 @@ import styles from './styles';
 import { validations, createAccount } from '../../../utils/constraints';
 import PickerInput from '../../common/PickerInput';
 
-const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => (
+const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => {
+  console.log("are we getting an error or what", error);
+  return (
   <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
     {error && <Text>{error}</Text>}
       <Field
@@ -37,7 +39,7 @@ const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => (
         values={["male", "female", "other"]} />
       <Button title="SIGN UP" onPress={handleSubmit} />
   </View>
-);
+); }
 
 CreateAccountForm.propTypes = {
   handleSubmit: func.isRequired,

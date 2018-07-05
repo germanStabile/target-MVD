@@ -3,19 +3,18 @@ import { Picker, View, Text, TouchableOpacity } from 'react-native';
 import SimplePicker from 'react-native-simple-picker';
 import { array, string, object, func, bool } from 'prop-types';
 
-import styles from './styles'
+import styles from './styles';
 
 class PickerInput extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { selectedValue: "select your gender" }
-
+    this.state = { selectedValue: "select your gender" };
   }
-  
+
   render() {
     const onPress = () => {
-      picker.show()
+      picker.show();
     }
     return (
       <View>
