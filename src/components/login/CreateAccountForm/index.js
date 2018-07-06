@@ -1,7 +1,7 @@
 import React from 'react';
 import { func, string, array, bool } from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
-import { View, Text, Button, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import Input from '../../common/Input';
 import styles from './styles';
@@ -40,8 +40,10 @@ const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => {
         labels={ ['Male', 'Female', 'Other'] }
         values={ ['male', 'female', 'other'] }
       />
-        {error && <Text style={styles.errorText}>{error}</Text>}
-      <Button title='SIGN UP' onPress={handleSubmit} />
+      {error && <Text style={styles.errorText}>{error}</Text>}
+      <TouchableOpacity onPress={handleSubmit} style={styles.signUp}>
+        <Text style={styles.signUpText}>SIGN UP</Text>
+      </TouchableOpacity>
   </View>
 ); }
 

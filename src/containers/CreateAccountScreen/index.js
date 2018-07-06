@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, Alert, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux';
 import { func, bool } from 'prop-types';
@@ -26,6 +26,10 @@ class CreateAccountScreen extends React.Component {
           <Header style={styles.header}/>
           <CreateAccountForm onSubmit={this.handleSubmit}
             containerStyle={isLoading ? [styles.disabledForm]: []}/>
+          <View style={styles.divider}/>
+          <TouchableOpacity onPress={ () => this.props.navigator.pop() } style={styles.signIn}>
+            <Text style={styles.signInText}>SIGN IN</Text>
+          </TouchableOpacity>
         </KeyboardAwareScrollView>
         <ActivityIndicator
          style={isLoading ? styles.activityLoading : styles.hidden }

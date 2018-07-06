@@ -1,14 +1,17 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 
 import styles from './styles';
 import Header from '../../components/common/Header';
+import LoginForm from '../../components/login/LoginForm';
 
 class LoginScreen extends React.Component {
 
   constructor() {
     super();
     this.onSignUpButtonPressed = this.onSignUpButtonPressed.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
@@ -16,15 +19,29 @@ class LoginScreen extends React.Component {
       <View style={styles.container}>
         <Header style={styles.header}/>
         <View style={styles.formContainer}>
-          <Text style={styles.redText}>This is the login screen</Text>
-          <Button title="Sign up" onPress={this.onSignUpButtonPressed}/>
+          <LoginForm onSubmit={this.handleSubmit} containerStyle={[styles.form]}/>
+          <Text style={styles.forgotPlaceholder}>Forgot your password?</Text>
+          <Text style={styles.facebookPlaceholder}>CONNECT WITH FACEBOOK</Text>
+          <View style={styles.divider}/>
+          <TouchableOpacity onPress={this.onSignUpButtonPressed} style={styles.signUp}>
+            <Text style={styles.signUpText}>SIGN UP</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
   }
 
+  handleSubmit() {
+    console.log("login handle submit tapped");
+  }
+
   onSignUpButtonPressed() {
-    this.props.navigator.push({screen:"target.CreateAccountScreen"});
+    this.props.navigator.push({
+      screen:"target.CreateAccountScreen",
+      navigatorStyle: {
+          navBarHidden: true
+      }
+    });
   }
 }
 

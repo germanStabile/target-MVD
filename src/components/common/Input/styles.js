@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   inputContainer: {
-    width: 188,
+    width: 180,
     minHeight: 37,
     borderWidth: 0.5,
     borderColor: blackColor,

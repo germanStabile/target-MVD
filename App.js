@@ -39,7 +39,10 @@ class App {
   startAuthenticatedApp() {
     Navigation.startSingleScreenApp({
       screen: {
-        screen: 'target.LoggedInScreen'
+        screen: 'target.LoggedInScreen',
+        navigatorStyle: {
+		        navBarHidden: true
+	      }
       }
     });
   }
@@ -50,7 +53,10 @@ class App {
     } else {
       Navigation.startSingleScreenApp({
         screen: {
-          screen: 'target.LoginScreen'
+          screen: 'target.LoginScreen',
+          navigatorStyle: {
+  		        navBarHidden: true
+  	      }
         }
       });
     }

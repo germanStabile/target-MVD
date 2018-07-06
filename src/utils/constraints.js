@@ -2,11 +2,11 @@ import validate from 'validate.js';
 
 export const login = {
   email: {
-    presence: true,
-    email: true
+    presence: { message: 'oops, this email is not valid' },
+    email: { message: 'oops, this email is not valid' }
   },
   password: {
-    presence: true
+    presence: { message: 'you forgor to put your password' }
   }
 };
 
