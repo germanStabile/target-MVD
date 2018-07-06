@@ -15,8 +15,7 @@ const styles = StyleSheet.create({
     height: 200
   },
   container: {
-    flex:1,
-    justifyContent: 'flex-start'
+    flex:1
   }
 });
 

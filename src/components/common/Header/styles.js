@@ -16,11 +16,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     textAlign: 'center',
-    alignSelf: 'center',
     fontSize: 40,
     marginTop: 60,
     fontWeight: 'bold',
-    backgroundColor: 'transparent',
     color: blackColor
   }
 });

@@ -12,28 +12,28 @@ export const login = {
 
 export const createAccount = {
   username: {
-    presence: { message: "you forgot to put your name" }
+    presence: { message: 'you forgot to put your name' }
   },
   email: {
-    presence: { message: "oops, this email is not valid" },
-    email: { message: "oops, this email is not valid" }
+    presence: { message: 'oops, this email is not valid' },
+    email: { message: 'oops, this email is not valid' }
   },
   password: {
-    presence: { message: "the password must be 8 characters long" },
+    presence: { message: 'the password must be 8 characters long' },
     length: {
       minimum: 8,
-      message : "the password must be 6 characters long"
+      message : 'the password must be 6 characters long'
     }
   },
-  password_confirmation: {
+  passwordConfirmation: {
     presence: true,
     equality: {
-      attribute: "password",
-      message: "passwords don't match"
+      attribute: 'password',
+      message: 'passwords don\'t match'
     }
   },
   gender: {
-    presence: { message: "you forgot to select your gender" }
+    presence: { message: 'you forgot to select your gender' }
   }
 };
 

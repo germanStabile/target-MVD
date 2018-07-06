@@ -6,9 +6,12 @@ import styles from './styles';
 import { bubbleGroupImage } from '../../../image';
 
 const Header = (props) => (
-  <ImageBackground source={bubbleGroupImage}
+  <ImageBackground
+    source={bubbleGroupImage}
     style={styles.headerBackground}
-    imageStyle={styles.headerImage} {...props}>
+    imageStyle={styles.headerImage}
+    {...props}
+  >
       <Text style={styles.headerText}>TARGET MVD</Text>
   </ImageBackground>
 );

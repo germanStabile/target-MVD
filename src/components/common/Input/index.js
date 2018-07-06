@@ -17,8 +17,8 @@ const Input = ({ input: { onChange, ...restInput }, password = false, label, met
           secureTextEntry={password}
           {...restInput}
         />
-        </View>
-        {touched && error && <Text style={styles.errorText}>{error}</Text>}
+    </View>
+    {touched && error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   </View>
 );
