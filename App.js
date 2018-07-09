@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import Immutable from 'immutable';
 import { sessionService } from 'redux-react-native-session';
+import SplashScreen from 'react-native-splash-screen';
 
 import configureStore from './src/store/configureStore';
 import registerScreens from './src/screens';
@@ -26,6 +27,7 @@ class App {
     if (!this.appInitialized) {
       const checked = session.get('userChecked');
       if (checked) {
+        SplashScreen.hide();
         this.appInitialized = true;
         this.authenticated = authenticated;
         this.startApp(authenticated);
