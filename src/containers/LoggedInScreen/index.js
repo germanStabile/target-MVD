@@ -5,6 +5,7 @@ import { func } from 'prop-types';
 import { connect } from 'react-redux';
 
 import { logOut } from '../../actions/userActions';
+import styles from './styles';
 
 class LoggedInScreen extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class LoggedInScreen extends React.Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>This is a dummy screen to show the logged in username</Text>
         <Text>{this.state.username}</Text>
         <Button onPress={this.logOutButtonTapped} title='LOG OUT'/>

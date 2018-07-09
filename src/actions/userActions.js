@@ -1,12 +1,14 @@
-import { SubmissionError } from 'redux-form';
 import { sessionService } from 'redux-react-native-session';
+import { SubmissionError } from 'redux-form';
 
 import userApi from '../api/userApi';
 import {
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
   START_SIGN_UP,
-  LOG_OUT_SUCCESS
+  START_LOG_IN,
+  LOG_IN_SUCCESS,
+  LOG_IN_ERROR
 } from './actionTypes';
 
 export const signUpSuccess = () => ({
@@ -21,16 +23,37 @@ export const startSignUp = () => ({
   type: START_SIGN_UP
 });
 
-export const logOutSuccess = () => ({
-  type: LOG_OUT_SUCCESS
+export const startLogIn = () => ({
+  type: START_LOG_IN
 });
 
+export const logInSuccess = () => ({
+  type: LOG_IN_SUCCESS
+});
+
+export const logInError = () => ({
+  type: LOG_IN_ERROR
+});
+
+export const logIn = user =>
+  dispatch => {
+    dispatch(startLogIn());
+    return userApi.logIn({ user }).then(response => {
+      sessionService.saveUser(response).then(() => dispatch(logInSuccess()));
+    }).catch(error => {
+      dispatch(logInError());
+      throw new SubmissionError({
+        email: true,
+        password: 'these email and password don\'t match'
+      });
+    });
+  }
+
 export const logOut = () =>
-  (dispatch) => {
+  dispatch => {
     userApi.logOut().then(() => {
       sessionService.deleteSession();
       sessionService.deleteUser();
-      dispatch(logOutSuccess());
     }).catch((err) => {
       throw (err);
     });
@@ -39,12 +62,12 @@ export const logOut = () =>
 export const signUp = user =>
  dispatch => {
   dispatch(startSignUp());
-  userApi.signUp({ user }).then(response => {
+  return userApi.signUp({ user }).then(response => {
     sessionService.saveUser(response).then(() => dispatch(signUpSuccess()));
   }).catch(error => {
     dispatch(signUpError());
     throw new SubmissionError({
-      _error: error,
+      email: 'this email is already in use'
     });
   })
 }

@@ -3,12 +3,12 @@ import { View, Text, Alert, ActivityIndicator, TouchableOpacity } from 'react-na
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux';
 import { func, bool } from 'prop-types';
-import { SubmissionError } from 'redux-form';
 
 import CreateAccountForm from '../../components/login/CreateAccountForm';
 import styles from './styles';
 import Header from '../../components/common/Header';
 import { signUp } from '../../actions/userActions';
+import { blackColor } from '../../constants/styleConstants';
 
 class CreateAccountScreen extends React.Component {
 
@@ -19,7 +19,7 @@ class CreateAccountScreen extends React.Component {
   }
 
   render() {
-    const isLoading = this.props.isLoading;
+    const { isLoading } = this.props;
     return (
       <View style={styles.container}>
         <KeyboardAwareScrollView pointerEvents={ isLoading ? 'none' : 'auto' }>
@@ -34,7 +34,7 @@ class CreateAccountScreen extends React.Component {
         <ActivityIndicator
          style={isLoading ? styles.activityLoading : styles.hidden }
          size="large"
-         color="black"
+         color={blackColor}
          animating={isLoading}
          />
       </View>
@@ -42,7 +42,7 @@ class CreateAccountScreen extends React.Component {
   }
 
   handleSubmit = values => {
-    return this.props.signUp(values.toJS());
+   return this.props.signUp(values.toJS());
   }
 }
 
@@ -51,11 +51,9 @@ class CreateAccountScreen extends React.Component {
     isLoading: bool.isRequired,
   };
 
-  const mapStateToProps = (state, ownProps) => {
-    return ({
-      isLoading: state.getIn(['user', 'isLoading']),
-    });
-  };
+  const mapStateToProps = (state, ownProps) => ({
+    isLoading: state.getIn(['user', 'isLoading'])
+  });
 
   const mapDispatch = dispatch => ({
     signUp: user => dispatch(signUp(user))

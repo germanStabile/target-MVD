@@ -8,6 +8,10 @@ class Session {
   static logOut() {
     return api.delete('api/v1/users/sign_out');
   }
+
+  static logIn(user) {
+    return api.post('api/v1/users/sign_in', user);
+  }
 }
 
 export default Session;

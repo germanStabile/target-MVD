@@ -25,8 +25,10 @@ class PickerInput extends React.Component {
           {label && <Text>{label}</Text>}
         </View>
         <TouchableOpacity style={styles.inputErrorLabelContainer} onPress={onPress}>
-          <View style={[styles.inputContainer,
-             (meta.touched && meta.error) ? styles.errorInputContainer : {}]}>
+          <View
+            style={[styles.inputContainer,
+             (meta.touched && meta.error) ? styles.errorInputContainer : {}]}
+          >
             <Text style={styles.input}>{this.state.selectedValue.toUpperCase()}</Text>
             <SimplePicker
               labels={labels}
@@ -40,7 +42,8 @@ class PickerInput extends React.Component {
               />
             </View>
             {meta.touched && meta.error &&
-               <Text style={styles.errorText}>{meta.error}</Text>}
+               <Text style={styles.errorText}>{meta.error}</Text>
+             }
         </TouchableOpacity>
       </View>
     );

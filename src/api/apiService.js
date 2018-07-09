@@ -31,7 +31,9 @@ const handleErrors = response =>
         if (response.status === 401) {
           sessionService.deleteSession();
         }
-      }).catch(err => reject(err));
+      }).catch(err => 
+        reject(err)
+      );
 
     response.json()
       .then((json) => {
