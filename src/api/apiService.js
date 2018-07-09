@@ -13,34 +13,31 @@ const saveSessionHeaders = (headers) => {
   }
 };
 
-const handleErrors = response =>
-  new Promise((resolve, reject) => {
-    if (!response) {
-      reject({ message: 'No response returned from fetch' });
-      return;
-    }
+const handleErrors = response => new Promise((resolve, reject) => {
+  if (!response) {
+    reject({ message: 'No response returned from fetch' });
+    return;
+  }
 
-    if (response.ok) {
-      saveSessionHeaders(response.headers);
-      resolve(response);
-      return;
-    }
+  if (response.ok) {
+    saveSessionHeaders(response.headers);
+    resolve(response);
+    return;
+  }
 
-    sessionService.loadSession()
-      .then(() => {
-        if (response.status === 401) {
-          sessionService.deleteSession();
-        }
-      }).catch(err => 
-        reject(err)
-      );
+  sessionService.loadSession()
+    .then(() => {
+      if (response.status === 401) {
+        sessionService.deleteSession();
+      }
+    }).catch(err => reject(err));
 
-    response.json()
-      .then((json) => {
-        const error = json || { message: response.statusText };
-        reject(error);
-      }).catch(() => reject({ message: 'Response not JSON' }));
-  });
+  response.json()
+    .then((json) => {
+      const error = json || { message: response.statusText };
+      reject(error);
+    }).catch(() => reject({ message: 'Response not JSON' }));
+});
 
 const getResponseBody = (response) => {
   const bodyIsEmpty = response.status === 204;

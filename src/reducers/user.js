@@ -25,9 +25,9 @@ const userReducer = (state = initialState, action) => {
       return state.set('isLoading', true);
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};
 
 export default userReducer;

@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 import { sessionService } from 'redux-react-native-session';
 
 import configureStore from './src/store/configureStore';
-import registerScreens from './src/screens'
+import registerScreens from './src/screens';
 
 const store = configureStore(Immutable.Map());
 registerScreens(store, Provider);
@@ -41,8 +41,8 @@ class App {
       screen: {
         screen: 'target.LoggedInScreen',
         navigatorStyle: {
-		        navBarHidden: true
-	      }
+          navBarHidden: true
+        }
       }
     });
   }
@@ -55,8 +55,8 @@ class App {
         screen: {
           screen: 'target.LoginScreen',
           navigatorStyle: {
-  		        navBarHidden: true
-  	      }
+            navBarHidden: true
+          }
         }
       });
     }

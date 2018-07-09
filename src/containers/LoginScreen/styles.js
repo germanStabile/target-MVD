@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   header: {
-    height: 200
+    height: 260
   },
   container: {
-    flex:1,
+    flex: 1
   },
   signUp: {
-    height:15,
-    width:103,
+    height: 15,
+    width: 103,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,

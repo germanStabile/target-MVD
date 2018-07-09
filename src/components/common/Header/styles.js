@@ -1,23 +1,23 @@
 import { StyleSheet } from 'react-native';
 
-import { blackColor } from '../../../constants/styleConstants'
+import { blackColor } from '../../../constants/styleConstants';
 
 const styles = StyleSheet.create({
   headerBackground: {
-    width:'100%',
+    width: '100%',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     height: 260,
   },
   headerImage: {
     flex: 1,
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     alignSelf: 'flex-start'
   },
   headerText: {
     textAlign: 'center',
-    fontSize: 40,
-    marginTop: 60,
+    fontSize: 30,
+    marginTop: 110,
     fontWeight: 'bold',
     color: blackColor
   }

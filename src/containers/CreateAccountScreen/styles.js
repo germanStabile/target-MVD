@@ -7,8 +7,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-    height: 180,
-    marginBottom: -130
+    height: 260,
+    marginTop: -50,
+    marginBottom: -150
   },
   disabledForm: {
     opacity: 0.2
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     height: 0.5,
     width: 121,
     backgroundColor: blackColor,
-    marginTop: 19,
+    marginTop: 40,
     alignSelf: 'center',
     opacity: 0.5
   },
