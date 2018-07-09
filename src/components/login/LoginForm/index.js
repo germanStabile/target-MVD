@@ -11,13 +11,13 @@ const LoginForm = ({ handleSubmit, error, containerStyle }) => {
   return (
     <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
         <Field
-          name='email'
-          label='EMAIL'
+          name="email"
+          label="EMAIL"
           component= {Input}
         />
         <Field
-          name='password'
-          label='PASSWORD'
+          name="password"
+          label="PASSWORD"
           component= {Input}
           password
         />

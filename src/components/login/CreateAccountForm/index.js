@@ -13,29 +13,29 @@ const CreateAccountForm = ({ handleSubmit, error, containerStyle }) => {
   <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
       <Field
         name="username"
-        label='NAME'
+        label="NAME"
         component= {Input}
       />
       <Field
         name="email"
-        label='EMAIL'
+        label="EMAIL"
         component= {Input}
       />
       <Field
         name="password"
-        label='PASSWORD'
+        label="PASSWORD"
         component= {Input}
         password
       />
       <Field
         name="passwordConfirmation"
-        label='CONFIRM PASSWORD'
+        label="CONFIRM PASSWORD"
         component= {Input}
         password
       />
       <Field
         name="gender"
-        label='GENDER'
+        label="GENDER"
         component= {PickerInput}
         labels={ ['Male', 'Female', 'Other'] }
         values={ ['male', 'female', 'other'] }
