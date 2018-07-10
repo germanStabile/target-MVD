@@ -5,7 +5,7 @@ import { blackColor, redColor } from '../../../constants/styleConstants';
 const styles = StyleSheet.create({
   input: {
     flex: 1,
-    textAlign:'center',
+    textAlign: 'center',
     backgroundColor: 'transparent'
   },
   inputContainer: {

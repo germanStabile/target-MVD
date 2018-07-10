@@ -40,9 +40,7 @@ const CreateAccountForm = ({ handleSubmit, containerStyle }) => (
       values={['male', 'female', 'other']}
     />
     <TouchableOpacity onPress={handleSubmit} style={styles.signUp}>
-      <Text style={styles.signUpText}>
-      SIGN UP
-      </Text>
+      <Text style={styles.signUpText}>SIGN UP</Text>
     </TouchableOpacity>
   </View>
 );

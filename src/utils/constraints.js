@@ -22,7 +22,7 @@ export const createAccount = {
     presence: { message: 'the password must be 8 characters long' },
     length: {
       minimum: 8,
-      message : 'the password must be 6 characters long'
+      message: 'the password must be 6 characters long'
     }
   },
   passwordConfirmation: {
@@ -37,5 +37,4 @@ export const createAccount = {
   }
 };
 
-export const validations = constraints =>
-  data => validate(data.toJS(), constraints, { fullMessages:false }) || {};
+export const validations = constraints => data => validate(data.toJS(), constraints, { fullMessages: false }) || {};

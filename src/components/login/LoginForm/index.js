@@ -1,9 +1,7 @@
 import React from 'react';
 import { func, array } from 'prop-types';
 import { Field, reduxForm } from 'redux-form/immutable';
-import {
-  View, Text, TouchableOpacity
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import Input from '../../common/Input';
 import styles from './styles';
@@ -26,9 +24,7 @@ const LoginForm = ({ handleSubmit, containerStyle }) => (
       style={styles.submit}
       onPress={handleSubmit}
     >
-      <Text style={styles.submitText}>
-      SIGN IN
-      </Text>
+      <Text style={styles.submitText}>SIGN IN</Text>
     </TouchableOpacity>
   </View>
 );

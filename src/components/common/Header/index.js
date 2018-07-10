@@ -11,9 +11,7 @@ const Header = props => (
     imageStyle={styles.headerImage}
     {...props}
   >
-    <Text style={styles.headerText}>
-    TARGET MVD
-    </Text>
+    <Text style={styles.headerText}>TARGET MVD</Text>
   </ImageBackground>
 );
 

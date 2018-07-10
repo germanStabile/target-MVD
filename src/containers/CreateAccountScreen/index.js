@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  View, Text, ActivityIndicator, TouchableOpacity
-} from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { func, bool, object } from 'prop-types';
@@ -36,9 +34,7 @@ class CreateAccountScreen extends React.Component {
             />
             <View style={styles.divider} />
             <TouchableOpacity onPress={() => navigator.pop()} style={styles.signIn}>
-              <Text style={styles.signInText}>
-              SIGN IN
-              </Text>
+              <Text style={styles.signInText}>SIGN IN</Text>
             </TouchableOpacity>
           </KeyboardAwareScrollView>
           <ActivityIndicator

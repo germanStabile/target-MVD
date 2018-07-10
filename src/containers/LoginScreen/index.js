@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Text, View, TouchableOpacity, ActivityIndicator
-} from 'react-native';
+import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { func, bool, object } from 'prop-types';
 
@@ -14,7 +12,6 @@ import { blackColor } from '../../constants/styleConstants';
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
-
     this.onSignUpButtonPressed = this.onSignUpButtonPressed.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -44,17 +41,11 @@ class LoginScreen extends React.Component {
             onSubmit={this.handleSubmit}
             containerStyle={isLoading ? [styles.form, styles.disabledForm] : [styles.form]}
           />
-          <Text style={styles.forgotPlaceholder}>
-          Forgot your password?
-          </Text>
-          <Text style={styles.facebookPlaceholder}>
-          CONNECT WITH FACEBOOK
-          </Text>
+          <Text style={styles.forgotPlaceholder}>Forgot your password?</Text>
+          <Text style={styles.facebookPlaceholder}>CONNECT WITH FACEBOOK</Text>
           <View style={styles.divider} />
           <TouchableOpacity onPress={this.onSignUpButtonPressed} style={styles.signUp}>
-            <Text style={styles.signUpText}>
-            SIGN UP
-            </Text>
+            <Text style={styles.signUpText}>SIGN UP</Text>
           </TouchableOpacity>
         </View>
         <ActivityIndicator

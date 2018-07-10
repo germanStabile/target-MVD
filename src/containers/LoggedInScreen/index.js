@@ -29,12 +29,8 @@ class LoggedInScreen extends React.Component {
     const { username } = this.state;
     return (
       <View style={styles.container}>
-        <Text>
-        This is a dummy screen to show the logged in username
-        </Text>
-        <Text>
-          {username}
-        </Text>
+        <Text>This is a dummy screen to show the logged in username</Text>
+        <Text>{username}</Text>
         <Button onPress={this.logOutButtonTapped} title="LOG OUT" />
       </View>
     );

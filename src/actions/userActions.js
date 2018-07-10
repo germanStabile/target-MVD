@@ -43,7 +43,7 @@ export const logIn = user => (dispatch) => {
     dispatch(logInError());
     throw new SubmissionError({
       email: true,
-      password: 'these email and password don\'t match'
+      password: 'email and password don\'t match'
     });
   });
 };
