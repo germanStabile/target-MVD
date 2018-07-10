@@ -5,29 +5,24 @@ import { blackColor, redColor } from '../../../constants/styleConstants';
 const styles = StyleSheet.create({
   input: {
     flex: 1,
-    textAlign:'center',
-    backgroundColor: 'transparent',
+    textAlign: 'center',
     marginTop: 10
   },
   inputContainer: {
     width: 188,
     minHeight: 37,
     borderWidth: 0.5,
-    borderColor: blackColor,
-    backgroundColor: 'transparent',
+    borderColor: blackColor
   },
   errorInputContainer: {
-    borderColor: redColor,
-    backgroundColor: 'transparent'
+    borderColor: redColor
   },
   inputErrorLabelContainer: {
     marginBottom: 24,
-    alignItems: 'center',
-    backgroundColor: 'transparent'
+    alignItems: 'center'
   },
   labelContainer: {
-    alignItems: 'center',
-    backgroundColor: 'transparent'
+    alignItems: 'center'
   },
   errorText: {
     color: redColor
