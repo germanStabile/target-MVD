@@ -1,6 +1,7 @@
 import React from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { array } from 'prop-types';
+import { Alert } from 'react-native';
 
 import { userMarkerImage } from '../../../image';
 import { latitudeDelta, longitudeDelta } from '../../../constants/constants';
@@ -16,8 +17,8 @@ class MapComponent extends React.Component {
     return {
       userCoords: null,
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 0,
+        longitude: 0,
         latitudeDelta,
         longitudeDelta,
       },
@@ -39,13 +40,20 @@ class MapComponent extends React.Component {
           }
         });
       },
-      error => console.log('Error getting current positiom: ', error), // eslint-disable-line no-console
+      () => this.displayLocationErrorAlert(),
       { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
     );
   }
 
   onRegionChange(region) {
     this.setState({ region });
+  }
+
+  displayLocationErrorAlert() {
+    Alert.alert(
+      'Error getting current position',
+      'Enable location access for a better target experience!'
+    );
   }
 
   render() {
@@ -61,7 +69,8 @@ class MapComponent extends React.Component {
           <Marker
             image={userMarkerImage}
             coordinate={userCoords}
-          /> }
+          />
+        }
       </MapView>
     );
   }

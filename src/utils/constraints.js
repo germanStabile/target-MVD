@@ -19,10 +19,10 @@ export const createAccount = {
     email: { message: 'oops, this email is not valid' }
   },
   password: {
-    presence: { message: 'the password must be 8 characters long' },
+    presence: { message: 'the password must be at least 8 characters long' },
     length: {
       minimum: 8,
-      message: 'the password must be 8 characters long'
+      message: 'the password must be at least 8 characters long'
     }
   },
   passwordConfirmation: {

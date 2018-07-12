@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { object } from 'prop-types';
 
 import { newTargetImage, profileIcon, dialogIcon } from '../../image';
 import styles from './styles';
 import NavHeader from '../../components/common/NavHeader';
 import MapComponent from '../../components/common/MapComponent';
+import IconButton from '../../components/common/IconButton';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -25,28 +26,25 @@ class HomeScreen extends React.Component {
   }
 
   onChatPress() {
-    console.log('chat button pressed'); // eslint-disable-line no-console
   }
 
   profileButton() {
     return (
-      <TouchableOpacity
+      <IconButton
         style={styles.leftBarButton}
         onPress={this.onProfilePress}
-      >
-        <Image source={profileIcon} />
-      </TouchableOpacity>
+        image={profileIcon}
+      />
     );
   }
 
   chatButton() {
     return (
-      <TouchableOpacity
+      <IconButton
         style={styles.rightBarButton}
         onPress={this.onChatPress}
-      >
-        <Image source={dialogIcon} />
-      </TouchableOpacity>
+        image={dialogIcon}
+      />
     );
   }
 
