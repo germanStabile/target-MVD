@@ -42,7 +42,8 @@ export const requestPasswordReset = () => ({
   type: REQUEST_PASSWORD_RESET
 });
 
-export const requestPasswordResetSuccess = () => ({
+export const requestPasswordResetSuccess = message => ({
+  message,
   type: REQUEST_PASSWORD_RESET_SUCCESS
 });
 
@@ -50,12 +51,15 @@ export const requestPasswordResetError = () => ({
   type: REQUEST_PASSWORD_RESET_ERROR
 });
 
-export const passwordReset = email => (dispatch) => {
+export const resetPassword = email => (dispatch) => {
   dispatch(requestPasswordReset());
-  return userApi.passwordReset({ email }).then((response) => {
-    dispatch(requestPasswordResetError());
+  return userApi.requestPasswordReset({ email, redirect_url: 'http://www.example.com' }).then((response) => {
+    dispatch(requestPasswordResetSuccess(response.message));
   }).catch(() => {
     dispatch(requestPasswordResetError());
+    throw new SubmissionError({
+      email: 'oops, email doesn\'t match our records'
+    });
   });
 };
 
