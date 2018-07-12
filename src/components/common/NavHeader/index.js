@@ -16,9 +16,9 @@ const NavHeader = ({ leftChild, rightChild, title, ...otherProps }) => (
     }
     <Text style={styles.title}>{title}</Text>
     {rightChild &&
-    <View>
-      {rightChild}
-    </View>
+      <View>
+        {rightChild}
+      </View>
     }
   </View>
 );
