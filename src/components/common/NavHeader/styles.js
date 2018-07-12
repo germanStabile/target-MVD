@@ -7,11 +7,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 80,
     backgroundColor: whiteColor,
-    justifyContent: 'center'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   title: {
-    marginTop: 40,
-    textAlign: 'center'
+    marginTop: 25,
+    textAlign: 'center',
+    alignSelf: 'center',
+    fontWeight: 'bold'
   }
 });
 
