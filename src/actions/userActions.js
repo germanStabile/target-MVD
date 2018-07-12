@@ -8,7 +8,10 @@ import {
   START_SIGN_UP,
   START_LOG_IN,
   LOG_IN_SUCCESS,
-  LOG_IN_ERROR
+  LOG_IN_ERROR,
+  REQUEST_PASSWORD_RESET,
+  REQUEST_PASSWORD_RESET_ERROR,
+  REQUEST_PASSWORD_RESET_SUCCESS
 } from './actionTypes';
 
 export const signUpSuccess = () => ({
@@ -34,6 +37,27 @@ export const logInSuccess = () => ({
 export const logInError = () => ({
   type: LOG_IN_ERROR
 });
+
+export const requestPasswordReset = () => ({
+  type: REQUEST_PASSWORD_RESET
+});
+
+export const requestPasswordResetSuccess = () => ({
+  type: REQUEST_PASSWORD_RESET_SUCCESS
+});
+
+export const requestPasswordResetError = () => ({
+  type: REQUEST_PASSWORD_RESET_ERROR
+});
+
+export const passwordReset = email => (dispatch) => {
+  dispatch(requestPasswordReset());
+  return userApi.passwordReset({ email }).then((response) => {
+    dispatch(requestPasswordResetError());
+  }).catch(() => {
+    dispatch(requestPasswordResetError());
+  });
+};
 
 export const logIn = user => (dispatch) => {
   dispatch(startLogIn());

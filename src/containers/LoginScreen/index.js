@@ -13,6 +13,7 @@ class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.onSignUpButtonPressed = this.onSignUpButtonPressed.bind(this);
+    this.onForgotPasswordButtonTapped = this.onForgotPasswordButtonTapped.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -23,6 +24,13 @@ class LoginScreen extends React.Component {
       navigatorStyle: {
         navBarHidden: true
       }
+    });
+  }
+
+  onForgotPasswordButtonTapped() {
+    const { navigator } = this.props;
+    navigator.push({
+      screen: 'target.ResetPasswordScreen',
     });
   }
 
@@ -41,7 +49,9 @@ class LoginScreen extends React.Component {
             onSubmit={this.handleSubmit}
             containerStyle={isLoading ? [styles.form, styles.disabledForm] : [styles.form]}
           />
-          <Text style={styles.forgotPlaceholder}>Forgot your password?</Text>
+          <TouchableOpacity onPress={this.onForgotPasswordButtonTapped}>
+            <Text style={styles.forgotPlaceholder}>Forgot your password?</Text>
+          </TouchableOpacity>
           <Text style={styles.facebookPlaceholder}>CONNECT WITH FACEBOOK</Text>
           <View style={styles.divider} />
           <TouchableOpacity onPress={this.onSignUpButtonPressed} style={styles.signUp}>

@@ -6,7 +6,14 @@ export const login = {
     email: { message: 'oops, this email is not valid' }
   },
   password: {
-    presence: { message: 'you forgor to put your password' }
+    presence: { message: 'you forgot to put your password' }
+  }
+};
+
+export const resetPassword = {
+  email: {
+    presence: { message: 'oops, this email is not valid' },
+    email: { message: 'oops, this email is not valid' }
   }
 };
 
