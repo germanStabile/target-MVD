@@ -2,6 +2,7 @@ import { sessionService } from 'redux-react-native-session';
 import { SubmissionError } from 'redux-form';
 
 import userApi from '../api/userApi';
+import { resetPassDeepLink } from '../constants/constants';
 import {
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
@@ -11,7 +12,10 @@ import {
   LOG_IN_ERROR,
   REQUEST_PASSWORD_RESET,
   REQUEST_PASSWORD_RESET_ERROR,
-  REQUEST_PASSWORD_RESET_SUCCESS
+  REQUEST_PASSWORD_RESET_SUCCESS,
+  EDIT_PASSWORD_RESET,
+  EDIT_PASSWORD_RESET_SUCCESS,
+  EDIT_PASSWORD_RESET_ERROR
 } from './actionTypes';
 
 export const signUpSuccess = () => ({
@@ -51,14 +55,38 @@ export const requestPasswordResetError = () => ({
   type: REQUEST_PASSWORD_RESET_ERROR
 });
 
+export const editPasswordReset = () => ({
+  type: EDIT_PASSWORD_RESET
+});
+
+export const editPasswordResetSuccess = () => ({
+  type: EDIT_PASSWORD_RESET_SUCCESS
+});
+
+export const editPasswordResetError = () => ({
+  type: EDIT_PASSWORD_RESET_ERROR
+});
+
 export const resetPassword = email => (dispatch) => {
   dispatch(requestPasswordReset());
-  return userApi.requestPasswordReset({ email, redirect_url: 'http://www.example.com' }).then((response) => {
+  return userApi.requestPasswordReset({ email, redirect_url: resetPassDeepLink }).then((response) => {
     dispatch(requestPasswordResetSuccess(response.message));
   }).catch(() => {
     dispatch(requestPasswordResetError());
     throw new SubmissionError({
       email: 'oops, email doesn\'t match our records'
+    });
+  });
+};
+
+export const editResetPassword = passwords => (dispatch) => {
+  dispatch(editPasswordReset());
+  return userApi.editPasswordReset(passwords).then(() => {
+    dispatch(editPasswordResetSuccess());
+  }).catch(() => {
+    dispatch(editPasswordResetError());
+    throw new SubmissionError({
+      password: 'oops, there was a problem resetting your password, please try again'
     });
   });
 };

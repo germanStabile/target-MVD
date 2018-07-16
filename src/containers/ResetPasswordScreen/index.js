@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
-import { func, string, bool } from 'prop-types';
+import { View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
+import { func, bool, object } from 'prop-types';
 import { connect } from 'react-redux';
 
+import { sessionService } from 'redux-react-native-session';
 import styles from './styles';
 import Header from '../../components/common/Header';
 import ResetPasswordForm from '../../components/login/ResetPasswordForm';
-import { resetPassword } from '../../actions/userActions';
+import { editResetPassword } from '../../actions/userActions';
 import { blackColor } from '../../constants/styleConstants';
 
 class ResetPasswordScreen extends React.Component {
@@ -14,16 +15,45 @@ class ResetPasswordScreen extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.goToLogin = this.goToLogin.bind(this);
+    this.state = {
+      successMessage: null
+    };
+  }
+
+  goToLogin() {
+    const { navigator } = this.props;
+    navigator.push({
+      screen: 'target.LoginScreen',
+      navigatorStyle: {
+        navBarHidden: true
+      }
+    });
   }
 
   handleSubmit(values) {
-    const { resetPassword } = this.props;
-    const emailValue = values.toJS().email;
-    return resetPassword(emailValue);
+    const { editResetPassword } = this.props;
+    return editResetPassword(values.toJS()).then(() => {
+      // deleting session to avoid issues on next runs
+      // if the user doesn't log in immediately
+      sessionService.deleteSession();
+      this.setState({
+        successMessage: 'Successfully updated your password you\'ll be redirected to the login screen'
+      });
+
+      // give some time to the user to read the success message before pushing login screen
+      setTimeout(() => {
+        this.setState({
+          successMessage: null,
+        });
+        this.goToLogin();
+      }, 2000);
+    });
   }
 
   render() {
-    const { message, isLoading } = this.props;
+    const { isLoading } = this.props;
+    const { successMessage } = this.state;
     return (
       <View style={styles.container}>
         <Header style={styles.header} />
@@ -32,31 +62,34 @@ class ResetPasswordScreen extends React.Component {
             [styles.form, styles.disabledForm] : [styles.form]}
           onSubmit={this.handleSubmit}
         />
-        {message && <Text style={styles.message}>{message}</Text>}
         <ActivityIndicator
           style={isLoading ? styles.activityLoading : styles.hidden}
           size="large"
           color={blackColor}
           animating={isLoading}
         />
+        { successMessage && <Text>{successMessage}</Text>}
+        <View style={styles.divider} />
+        <TouchableOpacity onPress={this.goToLogin} style={styles.signIn}>
+          <Text style={styles.signInText}>SIGN IN</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 ResetPasswordScreen.propTypes = {
-  resetPassword: func.isRequired,
-  message: string,
-  isLoading: bool.isRequired
+  editResetPassword: func.isRequired,
+  isLoading: bool.isRequired,
+  navigator: object.isRequired
 };
 
 const mapDispatch = dispatch => ({
-  resetPassword: email => dispatch(resetPassword(email))
+  editResetPassword: email => dispatch(editResetPassword(email))
 });
 
 const mapStateToProps = state => ({
   isLoading: state.getIn(['user', 'isLoading']),
-  message: state.getIn(['user', 'resetMessage'])
 });
 
 export default connect(mapStateToProps, mapDispatch)(ResetPasswordScreen);

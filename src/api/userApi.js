@@ -16,6 +16,10 @@ class Session {
   static requestPasswordReset(email) {
     return api.post('api/v1/users/password', email);
   }
+
+  static editPasswordReset(passwords) {
+    return api.put('api/v1/users/password', passwords);
+  }
 }
 
 export default Session;

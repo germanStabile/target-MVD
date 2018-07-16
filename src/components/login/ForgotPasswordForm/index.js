@@ -5,21 +5,14 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import Input from '../../common/Input';
 import styles from './styles';
-import { validations, resetPassword } from '../../../utils/constraints';
+import { validations, forgotPassword } from '../../../utils/constraints';
 
-const ResetPasswordForm = ({ handleSubmit, containerStyle }) => (
+const ForgotPasswordForm = ({ handleSubmit, containerStyle }) => (
   <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
     <Field
-      name="password"
-      label="PASSWORD"
+      name="email"
+      label="EMAIL"
       component={Input}
-      password
-    />
-    <Field
-      name="passwordConfirmation"
-      label="CONFIRM PASSWORD"
-      component={Input}
-      password
     />
     <TouchableOpacity
       style={styles.submit}
@@ -30,12 +23,12 @@ const ResetPasswordForm = ({ handleSubmit, containerStyle }) => (
   </View>
 );
 
-ResetPasswordForm.propTypes = {
+ForgotPasswordForm.propTypes = {
   handleSubmit: func.isRequired,
   containerStyle: array
 };
 
 export default reduxForm({
-  form: 'resetPassword',
-  validate: validations(resetPassword)
-})(ResetPasswordForm);
+  form: 'forgotPassword',
+  validate: validations(forgotPassword)
+})(ForgotPasswordForm);

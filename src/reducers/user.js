@@ -9,6 +9,9 @@ import {
   REQUEST_PASSWORD_RESET_ERROR,
   REQUEST_PASSWORD_RESET_SUCCESS,
   REQUEST_PASSWORD_RESET,
+  EDIT_PASSWORD_RESET,
+  EDIT_PASSWORD_RESET_ERROR,
+  EDIT_PASSWORD_RESET_SUCCESS
 } from '../actions/actionTypes';
 
 export const initialState = Immutable.fromJS({
@@ -22,12 +25,14 @@ const userReducer = (state = initialState, action) => {
     case SIGN_UP_SUCCESS:
     case SIGN_UP_ERROR:
     case REQUEST_PASSWORD_RESET_ERROR:
+    case EDIT_PASSWORD_RESET_ERROR:
     {
       return state.set('isLoading', false);
     }
     case START_LOG_IN:
     case START_SIGN_UP:
     case REQUEST_PASSWORD_RESET:
+    case EDIT_PASSWORD_RESET:
     {
       return state.set('isLoading', true);
     }
@@ -35,6 +40,11 @@ const userReducer = (state = initialState, action) => {
     {
       const newState = state.set('isLoading', false);
       return newState.set('resetMessage', action.message);
+    }
+    case EDIT_PASSWORD_RESET_SUCCESS:
+    {
+      const newState = state.set('isLoading', false);
+      return newState.set('resetMessage', null);
     }
     default: {
       return state;

@@ -30,7 +30,7 @@ class LoginScreen extends React.Component {
   onForgotPasswordButtonTapped() {
     const { navigator } = this.props;
     navigator.push({
-      screen: 'target.ResetPasswordScreen',
+      screen: 'target.ForgotPasswordScreen',
     });
   }
 

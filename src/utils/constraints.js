@@ -11,6 +11,23 @@ export const login = {
 };
 
 export const resetPassword = {
+  password: {
+    presence: { message: 'the password must be at least 8 characters long' },
+    length: {
+      minimum: 8,
+      message: 'the password must be at least 8 characters long'
+    }
+  },
+  passwordConfirmation: {
+    presence: true,
+    equality: {
+      attribute: 'password',
+      message: 'passwords don\'t match'
+    }
+  }
+};
+
+export const forgotPassword = {
   email: {
     presence: { message: 'oops, this email is not valid' },
     email: { message: 'oops, this email is not valid' }
