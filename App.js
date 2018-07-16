@@ -41,7 +41,7 @@ class App {
   startAuthenticatedApp() {
     Navigation.startSingleScreenApp({
       screen: {
-        screen: 'target.LoggedInScreen',
+        screen: 'target.HomeScreen',
         navigatorStyle: {
           navBarHidden: true
         }
