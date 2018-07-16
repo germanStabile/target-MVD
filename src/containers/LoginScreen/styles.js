@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginTop: 76,
     opacity: 0.5
   },
-  forgotPlaceholder: {
+  forgotPasswordText: {
     textAlign: 'center',
     marginTop: 11
   },

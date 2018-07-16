@@ -50,7 +50,7 @@ class LoginScreen extends React.Component {
             containerStyle={isLoading ? [styles.form, styles.disabledForm] : [styles.form]}
           />
           <TouchableOpacity onPress={this.onForgotPasswordButtonTapped}>
-            <Text style={styles.forgotPlaceholder}>Forgot your password?</Text>
+            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
           </TouchableOpacity>
           <Text style={styles.facebookPlaceholder}>CONNECT WITH FACEBOOK</Text>
           <View style={styles.divider} />
