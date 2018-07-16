@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { redColor, blackColor, whiteColor } from '../../../constants/styleConstants';
 
-const styles = StyleSheet.create({
+const formStyles = StyleSheet.create({
   container: {
     marginTop: -20,
     alignItems: 'center'
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default styles;
+export default formStyles;

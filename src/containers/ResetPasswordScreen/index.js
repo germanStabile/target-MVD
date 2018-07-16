@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { func, bool, object } from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -8,7 +8,8 @@ import styles from './styles';
 import Header from '../../components/common/Header';
 import ResetPasswordForm from '../../components/login/ResetPasswordForm';
 import { editResetPassword } from '../../actions/userActions';
-import { blackColor } from '../../constants/styleConstants';
+import Loader from '../../components/common/Loader';
+import { passwordResetSuccess } from '../../constants/messages';
 
 class ResetPasswordScreen extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class ResetPasswordScreen extends React.Component {
       // if the user doesn't log in immediately
       sessionService.deleteSession();
       this.setState({
-        successMessage: 'Successfully updated your password you\'ll be redirected to the login screen'
+        successMessage: passwordResetSuccess
       });
 
       // give some time to the user to read the success message before pushing login screen
@@ -58,17 +59,11 @@ class ResetPasswordScreen extends React.Component {
       <View style={styles.container}>
         <Header style={styles.header} />
         <ResetPasswordForm
-          containerStyle={isLoading ?
-            [styles.form, styles.disabledForm] : [styles.form]}
+          containerStyle={[styles.form, isLoading ? styles.disabledForm : null]}
           onSubmit={this.handleSubmit}
         />
-        <ActivityIndicator
-          style={isLoading ? styles.activityLoading : styles.hidden}
-          size="large"
-          color={blackColor}
-          animating={isLoading}
-        />
-        { successMessage && <Text>{successMessage}</Text>}
+        {isLoading && <Loader />}
+        {successMessage && <Text>{successMessage}</Text>}
         <View style={styles.divider} />
         <TouchableOpacity onPress={this.goToLogin} style={styles.signIn}>
           <Text style={styles.signInText}>SIGN IN</Text>

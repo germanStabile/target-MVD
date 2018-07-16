@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { func, bool, object } from 'prop-types';
@@ -7,8 +7,8 @@ import { func, bool, object } from 'prop-types';
 import CreateAccountForm from '../../components/login/CreateAccountForm';
 import styles from './styles';
 import Header from '../../components/common/Header';
+import Loader from '../../components/common/Loader';
 import { signUp } from '../../actions/userActions';
-import { blackColor } from '../../constants/styleConstants';
 
 class CreateAccountScreen extends React.Component {
   constructor(props) {
@@ -37,12 +37,7 @@ class CreateAccountScreen extends React.Component {
               <Text style={styles.signInText}>SIGN IN</Text>
             </TouchableOpacity>
           </KeyboardAwareScrollView>
-          <ActivityIndicator
-            style={isLoading ? styles.activityLoading : styles.hidden}
-            size="large"
-            color={blackColor}
-            animating={isLoading}
-          />
+          {isLoading && <Loader />}
         </View>
       );
     }

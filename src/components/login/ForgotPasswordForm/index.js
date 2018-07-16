@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import Input from '../../common/Input';
-import styles from './styles';
+import styles from '../../common/FormStyle';
 import { validations, forgotPassword } from '../../../utils/constraints';
 
 const ForgotPasswordForm = ({ handleSubmit, containerStyle }) => (

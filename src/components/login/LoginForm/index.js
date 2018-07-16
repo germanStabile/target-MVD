@@ -5,10 +5,11 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import Input from '../../common/Input';
 import styles from './styles';
+import formStyles from '../../common/FormStyle';
 import { validations, login } from '../../../utils/constraints';
 
 const LoginForm = ({ handleSubmit, containerStyle }) => (
-  <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
+  <View onSubmit={handleSubmit} style={[formStyles.container, ...containerStyle]}>
     <Field
       name="email"
       label="EMAIL"
@@ -24,7 +25,7 @@ const LoginForm = ({ handleSubmit, containerStyle }) => (
       style={styles.submit}
       onPress={handleSubmit}
     >
-      <Text style={styles.submitText}>SIGN IN</Text>
+      <Text style={formStyles.submitText}>SIGN IN</Text>
     </TouchableOpacity>
   </View>
 );

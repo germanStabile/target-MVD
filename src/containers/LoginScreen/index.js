@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { func, bool, object } from 'prop-types';
 
 import styles from './styles';
 import Header from '../../components/common/Header';
+import Loader from '../../components/common/Loader';
 import LoginForm from '../../components/login/LoginForm';
 import { logIn } from '../../actions/userActions';
-import { blackColor } from '../../constants/styleConstants';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -58,12 +58,7 @@ class LoginScreen extends React.Component {
             <Text style={styles.signUpText}>SIGN UP</Text>
           </TouchableOpacity>
         </View>
-        <ActivityIndicator
-          style={isLoading ? styles.activityLoading : styles.hidden}
-          size="large"
-          color={blackColor}
-          animating={isLoading}
-        />
+        {isLoading && <Loader />}
       </View>
     );
   }

@@ -12,18 +12,6 @@ const styles = StyleSheet.create({
   form: {
     height: 220,
   },
-  activityLoading: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  hidden: {
-    height: 0
-  },
   disabledForm: {
     opacity: 0.2
   },

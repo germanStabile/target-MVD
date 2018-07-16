@@ -5,7 +5,7 @@ import { sessionService } from 'redux-react-native-session';
 import SplashScreen from 'react-native-splash-screen';
 import { Linking } from 'react-native';
 
-import { dataFromUrl } from './src/utils/helpers';
+import { dataFromUrl, screenFromDeepLink } from './src/utils/helpers';
 import configureStore from './src/store/configureStore';
 import registerScreens from './src/screens';
 
@@ -23,10 +23,6 @@ class App {
 
   handleOpenURL = (event) => {
     const { url } = event;
-    const route = url.replace(/.*?:\/\//g, '');
-    const splitRoute = route.split('/');
-    const screen = splitRoute[0];
-
     const { token, client_id, uid } = dataFromUrl(url);
     const sessionHeaders = {
       token,
@@ -36,6 +32,7 @@ class App {
 
     sessionService.saveSession(sessionHeaders);
 
+    const screen = screenFromDeepLink(url);
     if (screen == 'resetPassword') {
       Navigation.startSingleScreenApp({
         screen: {

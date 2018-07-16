@@ -17,6 +17,12 @@ import {
   EDIT_PASSWORD_RESET_SUCCESS,
   EDIT_PASSWORD_RESET_ERROR
 } from './actionTypes';
+import {
+  emailInUse,
+  emailPassNoMatch,
+  problemResettingPass,
+  emailNoMatchRecords
+} from '../constants/messages';
 
 export const signUpSuccess = () => ({
   type: SIGN_UP_SUCCESS
@@ -74,7 +80,7 @@ export const resetPassword = email => (dispatch) => {
   }).catch(() => {
     dispatch(requestPasswordResetError());
     throw new SubmissionError({
-      email: 'oops, email doesn\'t match our records'
+      email: emailNoMatchRecords
     });
   });
 };
@@ -86,7 +92,7 @@ export const editResetPassword = passwords => (dispatch) => {
   }).catch(() => {
     dispatch(editPasswordResetError());
     throw new SubmissionError({
-      password: 'oops, there was a problem resetting your password, please try again'
+      password: problemResettingPass
     });
   });
 };
@@ -99,7 +105,7 @@ export const logIn = user => (dispatch) => {
     dispatch(logInError());
     throw new SubmissionError({
       email: true,
-      password: 'email and password don\'t match'
+      password: emailPassNoMatch
     });
   });
 };
@@ -120,7 +126,7 @@ export const signUp = user => (dispatch) => {
   }).catch(() => {
     dispatch(signUpError());
     throw new SubmissionError({
-      email: 'this email is already in use'
+      email: emailInUse
     });
   });
 };

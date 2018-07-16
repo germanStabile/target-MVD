@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 import { func, string, bool } from 'prop-types';
 import { connect } from 'react-redux';
 
 import styles from './styles';
 import Header from '../../components/common/Header';
+import Loader from '../../components/common/Loader';
 import ForgotPasswordForm from '../../components/login/ForgotPasswordForm';
 import { resetPassword } from '../../actions/userActions';
-import { blackColor } from '../../constants/styleConstants';
 
 class ForgotPasswordScreen extends React.Component {
   constructor(props) {
@@ -33,12 +33,7 @@ class ForgotPasswordScreen extends React.Component {
           onSubmit={this.handleSubmit}
         />
         {message && <Text style={styles.message}>{message}</Text>}
-        <ActivityIndicator
-          style={isLoading ? styles.activityLoading : styles.hidden}
-          size="large"
-          color={blackColor}
-          animating={isLoading}
-        />
+        {isLoading && <Loader />}
       </View>
     );
   }
