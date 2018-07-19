@@ -85,13 +85,13 @@ class MapComponent extends React.Component {
         region={region}
         onRegionChangeComplete={this.onRegionChange}
       >
-        { userCoords && !creatingTarget &&
+        {userCoords && !creatingTarget &&
           <Marker
             image={userMarkerImage}
             coordinate={userCoords}
           />
         }
-        { userCoords && creatingTarget &&
+        {userCoords && creatingTarget &&
           <Marker
             draggable
             image={userMarkerImage}
@@ -99,7 +99,7 @@ class MapComponent extends React.Component {
             onDragEnd={this.onDragEnd}
           />
         }
-        { circleRadius && creatingTarget &&
+        {circleRadius && creatingTarget &&
           <Circle
             center={newTargetCoords}
             radius={circleRadius}

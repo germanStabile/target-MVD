@@ -142,7 +142,7 @@ class HomeScreen extends React.Component {
           onPositionChange={this.onPositionChange}
           creatingTarget={creatingTarget}
         />
-        { !creatingTarget &&
+        {!creatingTarget &&
           <View style={styles.footer}>
             <TouchableOpacity onPress={this.onCreateTargetPress}>
               <Image source={newTargetImage} style={styles.centeredImage} />
@@ -150,7 +150,7 @@ class HomeScreen extends React.Component {
             </TouchableOpacity>
             {message && <Text style={styles.centeredText}>{message}</Text>}
           </View> }
-        { creatingTarget &&
+        {creatingTarget &&
           <View style={styles.createTargetFooter}>
             <KeyboardAwareScrollView>
               <CreateTargetForm
@@ -169,7 +169,7 @@ class HomeScreen extends React.Component {
             </KeyboardAwareScrollView>
           </View>
         }
-        { isLoading && <Loader /> }
+        {isLoading && <Loader /> }
       </View>
     );
   }
