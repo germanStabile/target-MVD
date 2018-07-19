@@ -3,19 +3,21 @@ import { StyleSheet } from 'react-native';
 import { blackColor } from '../../constants/styleConstants';
 
 const styles = StyleSheet.create({
+  header: {
+    height: 260
+  },
   container: {
     flex: 1
   },
-  header: {
-    height: 260,
-    marginTop: -50,
-    marginBottom: -150
+  form: {
+    height: 220,
   },
   disabledForm: {
     opacity: 0.2
   },
-  hidden: {
-    height: 0
+  message: {
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   divider: {
     height: 0.5,

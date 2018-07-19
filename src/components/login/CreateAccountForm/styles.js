@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { redColor, blackColor, whiteColor } from '../../../constants/styleConstants';
+import { blackColor } from '../../../constants/styleConstants';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,20 +8,12 @@ const styles = StyleSheet.create({
     marginTop: 80,
     alignItems: 'center'
   },
-  errorText: {
-    color: redColor,
-    textAlign: 'center'
-  },
-  signUp: {
+  submit: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: blackColor,
     height: 37,
     width: 114,
-  },
-  signUpText: {
-    textAlign: 'center',
-    color: whiteColor
   }
 });
 

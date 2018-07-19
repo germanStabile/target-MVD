@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import Input from '../../common/Input';
 import styles from './styles';
+import formStyles from '../../common/FormStyle';
 import { validations, createAccount } from '../../../utils/constraints';
 import PickerInput from '../../common/PickerInput';
 
@@ -39,8 +40,8 @@ const CreateAccountForm = ({ handleSubmit, containerStyle }) => (
       labels={['Male', 'Female', 'Other']}
       values={['male', 'female', 'other']}
     />
-    <TouchableOpacity onPress={handleSubmit} style={styles.signUp}>
-      <Text style={styles.signUpText}>SIGN UP</Text>
+    <TouchableOpacity onPress={handleSubmit} style={styles.submit}>
+      <Text style={formStyles.submitText}>SIGN UP</Text>
     </TouchableOpacity>
   </View>
 );

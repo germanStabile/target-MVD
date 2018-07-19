@@ -3,7 +3,9 @@ import { Provider } from 'react-redux';
 import Immutable from 'immutable';
 import { sessionService } from 'redux-react-native-session';
 import SplashScreen from 'react-native-splash-screen';
+import { Linking } from 'react-native';
 
+import { dataFromUrl, screenFromDeepLink } from './src/utils/helpers';
 import configureStore from './src/store/configureStore';
 import registerScreens from './src/screens';
 
@@ -19,6 +21,30 @@ class App {
     store.subscribe(this.onStoreUpdate.bind(this));
   }
 
+  handleOpenURL = (event) => {
+    const { url } = event;
+    const { token, client_id, uid } = dataFromUrl(url);
+    const sessionHeaders = {
+      token,
+      uid,
+      client: client_id
+    };
+
+    sessionService.saveSession(sessionHeaders);
+
+    const screen = screenFromDeepLink(url);
+    if (screen == 'resetPassword') {
+      Navigation.startSingleScreenApp({
+        screen: {
+          screen: 'target.ResetPasswordScreen',
+          navigatorStyle: {
+            navBarHidden: true
+          }
+        }
+      });
+    }
+  }
+
   onStoreUpdate() {
     const session = store.getState().get('session');
     const authenticated = session.get('authenticated');
@@ -27,6 +53,7 @@ class App {
     if (!this.appInitialized) {
       const checked = session.get('userChecked');
       if (checked) {
+        Linking.addEventListener('url', this.handleOpenURL);
         SplashScreen.hide();
         this.appInitialized = true;
         this.authenticated = authenticated;

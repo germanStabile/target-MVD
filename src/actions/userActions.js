@@ -2,14 +2,27 @@ import { sessionService } from 'redux-react-native-session';
 import { SubmissionError } from 'redux-form';
 
 import userApi from '../api/userApi';
+import { resetPassDeepLink } from '../constants/constants';
 import {
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
   START_SIGN_UP,
   START_LOG_IN,
   LOG_IN_SUCCESS,
-  LOG_IN_ERROR
+  LOG_IN_ERROR,
+  REQUEST_PASSWORD_RESET,
+  REQUEST_PASSWORD_RESET_ERROR,
+  REQUEST_PASSWORD_RESET_SUCCESS,
+  EDIT_PASSWORD_RESET,
+  EDIT_PASSWORD_RESET_SUCCESS,
+  EDIT_PASSWORD_RESET_ERROR
 } from './actionTypes';
+import {
+  emailInUse,
+  emailPassNoMatch,
+  problemResettingPass,
+  emailNoMatchRecords
+} from '../constants/messages';
 
 export const signUpSuccess = () => ({
   type: SIGN_UP_SUCCESS
@@ -35,6 +48,55 @@ export const logInError = () => ({
   type: LOG_IN_ERROR
 });
 
+export const requestPasswordReset = () => ({
+  type: REQUEST_PASSWORD_RESET
+});
+
+export const requestPasswordResetSuccess = message => ({
+  message,
+  type: REQUEST_PASSWORD_RESET_SUCCESS
+});
+
+export const requestPasswordResetError = () => ({
+  type: REQUEST_PASSWORD_RESET_ERROR
+});
+
+export const editPasswordReset = () => ({
+  type: EDIT_PASSWORD_RESET
+});
+
+export const editPasswordResetSuccess = () => ({
+  type: EDIT_PASSWORD_RESET_SUCCESS
+});
+
+export const editPasswordResetError = () => ({
+  type: EDIT_PASSWORD_RESET_ERROR
+});
+
+export const resetPassword = email => (dispatch) => {
+  dispatch(requestPasswordReset());
+  return userApi.requestPasswordReset({ email, redirect_url: resetPassDeepLink }).then((response) => {
+    dispatch(requestPasswordResetSuccess(response.message));
+  }).catch(() => {
+    dispatch(requestPasswordResetError());
+    throw new SubmissionError({
+      email: emailNoMatchRecords
+    });
+  });
+};
+
+export const editResetPassword = passwords => (dispatch) => {
+  dispatch(editPasswordReset());
+  return userApi.editPasswordReset(passwords).then(() => {
+    dispatch(editPasswordResetSuccess());
+  }).catch(() => {
+    dispatch(editPasswordResetError());
+    throw new SubmissionError({
+      password: problemResettingPass
+    });
+  });
+};
+
 export const logIn = user => (dispatch) => {
   dispatch(startLogIn());
   return userApi.logIn({ user }).then((response) => {
@@ -43,7 +105,7 @@ export const logIn = user => (dispatch) => {
     dispatch(logInError());
     throw new SubmissionError({
       email: true,
-      password: 'email and password don\'t match'
+      password: emailPassNoMatch
     });
   });
 };
@@ -64,7 +126,7 @@ export const signUp = user => (dispatch) => {
   }).catch(() => {
     dispatch(signUpError());
     throw new SubmissionError({
-      email: 'this email is already in use'
+      email: emailInUse
     });
   });
 };

@@ -95,7 +95,8 @@
     "react/no-array-index-key": 0,
     "prefer-promise-reject-errors": 0,
     "operator-linebreak": 0,
-    "object-curly-newline": 0
+    "object-curly-newline": 0,
+    "camelcase": 0
   },
   "globals": {
     "fetch": true,
