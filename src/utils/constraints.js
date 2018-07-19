@@ -27,6 +27,22 @@ export const resetPassword = {
   }
 };
 
+export const createTarget = {
+  areaLength: {
+    presence: { message: 'you forgot to set an area length' },
+    format: {
+      pattern: '^[0-9]+$',
+      message: 'please put a number for area length',
+    }
+  },
+  title: {
+    presence: { message: 'you forgot to put a title' }
+  },
+  topic: {
+    presence: { message: 'you forgot to select a topic' }
+  }
+};
+
 export const forgotPassword = {
   email: {
     presence: { message: 'oops, this email is not valid' },

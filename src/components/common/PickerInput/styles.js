@@ -4,15 +4,18 @@ import { blackColor, redColor } from '../../../constants/styleConstants';
 
 const styles = StyleSheet.create({
   input: {
-    flex: 1,
+    minWidth: 50,
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 5
   },
   inputContainer: {
     width: 188,
     minHeight: 37,
     borderWidth: 0.5,
-    borderColor: blackColor
+    borderColor: blackColor,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   errorInputContainer: {
     borderColor: redColor
@@ -26,6 +29,11 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: redColor
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 10
   }
 });
 
