@@ -8,6 +8,10 @@ class Target {
   static createTarget(target) {
     return api.post('api/v1/targets', target);
   }
+
+  static getTargets() {
+    return api.get('api/v1/targets');
+  }
 }
 
 export default Target;
