@@ -19,11 +19,12 @@ const Input = ({
       {label && <Text>{label}</Text>}
     </View>
     <View style={styles.inputErrorLabelContainer}>
-      <View style={[
-        styles.inputContainer,
-        containerStyle,
-        touched && error ? styles.errorInputContainer : {}
-      ]}
+      <View
+        style={[
+          styles.inputContainer,
+          containerStyle,
+          touched && error ? styles.errorInputContainer : {}
+        ]}
       >
         <TextInput
           style={[styles.input, unit && touched && !error ? inputStyle : {}]}
