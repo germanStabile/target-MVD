@@ -25,24 +25,20 @@ const userReducer = (state = initialState, action) => {
     case SIGN_UP_SUCCESS:
     case SIGN_UP_ERROR:
     case REQUEST_PASSWORD_RESET_ERROR:
-    case EDIT_PASSWORD_RESET_ERROR:
-    {
+    case EDIT_PASSWORD_RESET_ERROR: {
       return state.set('isLoading', false);
     }
     case START_LOG_IN:
     case START_SIGN_UP:
     case REQUEST_PASSWORD_RESET:
-    case EDIT_PASSWORD_RESET:
-    {
+    case EDIT_PASSWORD_RESET: {
       return state.set('isLoading', true);
     }
-    case REQUEST_PASSWORD_RESET_SUCCESS:
-    {
+    case REQUEST_PASSWORD_RESET_SUCCESS: {
       const newState = state.set('isLoading', false);
       return newState.set('resetMessage', action.message);
     }
-    case EDIT_PASSWORD_RESET_SUCCESS:
-    {
+    case EDIT_PASSWORD_RESET_SUCCESS: {
       const newState = state.set('isLoading', false);
       return newState.set('resetMessage', null);
     }

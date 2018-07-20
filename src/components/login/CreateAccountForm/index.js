@@ -39,6 +39,7 @@ const CreateAccountForm = ({ handleSubmit, containerStyle }) => (
       component={PickerInput}
       labels={['Male', 'Female', 'Other']}
       values={['male', 'female', 'other']}
+      initialValue="SELECT YOUR GENDER"
     />
     <TouchableOpacity onPress={handleSubmit} style={styles.submit}>
       <Text style={formStyles.submitText}>SIGN UP</Text>

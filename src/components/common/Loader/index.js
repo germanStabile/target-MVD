@@ -1,17 +1,22 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
+import { number } from 'prop-types';
 
 import { blackColor } from '../../../constants/styleConstants';
 import styles from './styles';
 
-const Loader = props => (
+const Loader = ({ loaderStyle, ...otherProps }) => (
   <ActivityIndicator
-    style={styles.activityLoading}
+    style={[styles.activityLoading, loaderStyle]}
     size="large"
     color={blackColor}
     animating
-    {...props}
+    {...otherProps}
   />
 );
+
+Loader.propTypes = {
+  loaderStyle: number
+};
 
 export default Loader;

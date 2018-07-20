@@ -11,7 +11,10 @@ const styles = StyleSheet.create({
     width: 180,
     minHeight: 37,
     borderWidth: 0.5,
-    borderColor: blackColor
+    borderColor: blackColor,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   errorInputContainer: {
     borderColor: redColor
@@ -25,6 +28,9 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: redColor
+  },
+  unit: {
+    marginLeft: 5
   }
 });
 
