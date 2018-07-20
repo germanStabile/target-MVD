@@ -149,7 +149,8 @@ class HomeScreen extends React.Component {
               <Text style={styles.footerText}>CREATE NEW TARGET</Text>
             </TouchableOpacity>
             {message && <Text style={styles.centeredText}>{message}</Text>}
-          </View> }
+          </View>
+        }
         {creatingTarget &&
           <View style={styles.createTargetFooter}>
             <KeyboardAwareScrollView>
