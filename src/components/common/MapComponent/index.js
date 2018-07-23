@@ -98,12 +98,13 @@ class MapComponent extends React.Component {
         {targets &&
           targets.map((target, index) => {
             const key = `marker${index}`;
+            const { lat, lng } = target.target;
             return (
               <Marker
                 key={key}
                 coordinate={{
-                  latitude: target.target.lat,
-                  longitude: target.target.lng
+                  latitude: lat,
+                  longitude: lng
                 }}
               >
                 <Image
