@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { func, array } from 'prop-types';
+import { func, array, object } from 'prop-types';
 
 import formStyles from '../../common/FormStyle';
 import styles from './styles';
@@ -9,8 +9,20 @@ import Input from '../../common/Input';
 import PickerInput from '../../common/PickerInput';
 import { validations, createTarget } from '../../../utils/constraints';
 
-const CreateTargetForm = ({ handleSubmit, topics, onAreaChange }) => {
+const CreateTargetForm = ({ handleSubmit, topics, onAreaChange, selectedTarget }) => {
   const topicLabels = topics.map(topic => topic.label);
+  let initialPickerIndex = null;
+  let initialLabel = null;
+  if (selectedTarget) {
+    let i;
+    for (i = 0; i < topics.length; i += 1) {
+      if (selectedTarget.target.topicId == topics[i].id) {
+        initialPickerIndex = i;
+        initialLabel = topicLabels[i];
+        break;
+      }
+    }
+  }
   return (
     <View onSubmit={handleSubmit} style={styles.container}>
       <Field
@@ -37,7 +49,8 @@ const CreateTargetForm = ({ handleSubmit, topics, onAreaChange }) => {
         labels={topicLabels}
         values={topicLabels}
         objectRef={topics}
-        initialValue="What do you want to talk about?"
+        initialValue={initialLabel || 'What do you want to talk about?'}
+        initialOptionIndex={initialPickerIndex}
       />
       <TouchableOpacity onPress={handleSubmit} style={formStyles.submit}>
         <Text style={formStyles.submitText}>SAVE TARGET</Text>
@@ -49,10 +62,12 @@ const CreateTargetForm = ({ handleSubmit, topics, onAreaChange }) => {
 CreateTargetForm.propTypes = {
   handleSubmit: func.isRequired,
   topics: array.isRequired,
-  onAreaChange: func
+  onAreaChange: func,
+  selectedTarget: object
 };
 
 export default reduxForm({
   form: 'createTarget',
-  validate: validations(createTarget)
+  validate: validations(createTarget),
+  enableReinitialize: true
 })(CreateTargetForm);

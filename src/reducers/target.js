@@ -9,7 +9,8 @@ import {
   TARGET_COORDS_CHANGED,
   START_GET_TARGETS,
   GET_TARGETS_SUCCESS,
-  GET_TARGETS_ERROR
+  GET_TARGETS_ERROR,
+  SELECT_TARGET
 } from '../actions/actionTypes';
 
 export const initialState = Immutable.fromJS({
@@ -42,6 +43,9 @@ const targetReducer = (state = initialState, action) => {
     case CREATE_TARGET:
     case GET_TOPICS: {
       return state.set('isLoading', true);
+    }
+    case SELECT_TARGET: {
+      return state.set('selectedTarget', action.target);
     }
     default: {
       return state;
