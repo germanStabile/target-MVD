@@ -5,7 +5,7 @@ import { Alert, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import styles from './styles';
-import { changeTargetCoords } from '../../../actions/targetActions';
+import { changeTargetCoords, selectTarget } from '../../../actions/targetActions';
 import { whiteColor, targetYellow } from '../../../constants/styleConstants';
 import { userMarkerImage } from '../../../image';
 import { latitudeDelta, longitudeDelta } from '../../../constants/constants';
@@ -18,6 +18,7 @@ class MapComponent extends React.Component {
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.topicImageWithId = this.topicImageWithId.bind(this);
+    this.tappedTarget = this.tappedTarget.bind(this);
   }
 
   getInitialState() {
@@ -68,6 +69,26 @@ class MapComponent extends React.Component {
     this.setState({ region });
   }
 
+  tappedTarget(target) {
+    const { lat, lng } = target.target;
+    const { region } = this.state;
+    const { selectTarget, changeTargetCoords } = this.props;
+    const coords = {
+      latitude: lat,
+      longitude: lng
+    };
+    this.setState({
+      region: {
+        latitude: lat,
+        longitude: lng,
+        longitudeDelta: region.longitudeDelta,
+        latitudeDelta: region.latitudeDelta
+      }
+    });
+    changeTargetCoords(coords);
+    selectTarget(target);
+  }
+
   topicImageWithId(topicId) {
     const { topics } = this.props;
     const topicData = topics.find(element => element.topic.id === topicId);
@@ -85,8 +106,7 @@ class MapComponent extends React.Component {
 
   render() {
     const { region, userCoords } = this.state;
-    const { mapStyle, circleRadius, creatingTarget, targetCoords, targets } = this.props;
-
+    const { mapStyle, circleRadius, creatingTarget, targetCoords, targets, selectedTarget } = this.props;
     const newTargetCoords = targetCoords || userCoords;
     return (
       <MapView
@@ -102,6 +122,7 @@ class MapComponent extends React.Component {
             return (
               <Marker
                 key={key}
+                onPress={(e) => { e.stopPropagation(); this.tappedTarget(target); }}
                 coordinate={{
                   latitude: lat,
                   longitude: lng
@@ -129,7 +150,7 @@ class MapComponent extends React.Component {
             onDragEnd={this.onDragEnd}
           />
         }
-        {circleRadius && creatingTarget &&
+        {circleRadius && (creatingTarget || selectedTarget) &&
           <Circle
             center={newTargetCoords}
             radius={circleRadius}
@@ -143,24 +164,28 @@ class MapComponent extends React.Component {
 }
 
 MapComponent.propTypes = {
+  onPositionChange: func.isRequired,
+  selectTarget: func.isRequired,
+  changeTargetCoords: func.isRequired,
   targets: array,
   mapStyle: array,
   circleRadius: number,
-  onPositionChange: func.isRequired,
   creatingTarget: bool,
   targetCoords: object,
-  changeTargetCoords: func.isRequired,
   topics: array,
+  selectedTarget: object
 };
 
 const mapStateToProps = state => ({
   targetCoords: state.getIn(['target', 'targetCoords']),
   targets: state.getIn(['target', 'targets']),
-  topics: state.getIn(['target', 'topics'])
+  topics: state.getIn(['target', 'topics']),
+  selectedTarget: state.getIn(['target', 'selectedTarget'])
 });
 
 const mapDispatch = dispatch => ({
-  changeTargetCoords: coords => dispatch(changeTargetCoords(coords))
+  changeTargetCoords: coords => dispatch(changeTargetCoords(coords)),
+  selectTarget: target => dispatch(selectTarget(target))
 });
 
 export default connect(mapStateToProps, mapDispatch)(MapComponent);

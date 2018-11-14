@@ -8,17 +8,34 @@ import styles from './styles';
 class PickerInput extends React.Component {
   constructor(props) {
     super(props);
+    this.selectValue = this.selectValue.bind(this);
+    this.state = {};
+  }
+
+  componentDidMount() {
     const { initialValue } = this.props;
-    this.state = { selectedValue: initialValue };
+    this.selectValue(initialValue);
+  }
+
+  selectValue(value) {
+    const { objectRef, input } = this.props;
+    const obj = objectRef ?
+      objectRef.filter(obj => obj.label == value)[0] : {};
+    this.setState({
+      selectedValue: obj ? value.toUpperCase() : value,
+      icon: obj ? obj.icon : null
+    });
+
+    if (obj) {
+      input.onChange(value);
+    }
   }
 
   render() {
     const onPress = () => {
       picker.show(); // eslint-disable-line no-undef
     };
-
-    const { values, labels, meta, label, input, containerStyle } = this.props;
-
+    const { values, labels, meta, label, input, containerStyle, initialOptionIndex } = this.props;
     const { selectedValue, icon } = this.state;
 
     return (
@@ -36,6 +53,7 @@ class PickerInput extends React.Component {
             <SimplePicker
               labels={labels}
               options={values}
+              initialOptionIndex={initialOptionIndex}
               ref={(select) => { picker = select; }} // eslint-disable-line no-undef
               onSubmit={(value) => {
                 const { objectRef } = this.props;
@@ -66,7 +84,8 @@ PickerInput.propTypes = {
   initialValue: string,
   input: object.isRequired,
   containerStyle: number,
-  objectRef: array
+  objectRef: array,
+  initialOptionIndex: number
 };
 
 export default PickerInput;
