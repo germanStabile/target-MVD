@@ -27,15 +27,16 @@ const targetReducer = (state = initialState, action) => {
       return state.set('targetCoords', action.coords);
     }
     case CREATE_TARGET_SUCCESS: {
-      const newState = state.set('isLoading', false);
-      return newState.set('targetCoords', null);
+      const newState = state.set('targetCoords', null);
+      return newState.set('isLoading', false)
     }
     case GET_TARGETS_SUCCESS: {
-      const newState = state.set('isLoading', false);
-      return newState.set('targets', action.targets);
+      const newState = state.set('targets', action.targets);
+      return newState.set('isLoading', false)
     }
     case GET_TOPICS_SUCCESS: {
-      const newState = state.set('topics', action.topics);
+      const { topics } = action
+      const newState = state.set('topics', topics);
       return newState.set('isLoading', false);
     }
     case START_GET_TARGETS:

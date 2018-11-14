@@ -70,8 +70,8 @@ class MapComponent extends React.Component {
 
   topicImageWithId(topicId) {
     const { topics } = this.props;
-    const topic = topics.filter(element => element.topic.id == topicId)[0];
-    const { icon } = topic.topic;
+    const topicData = topics.find(element => element.topic.id === topicId);
+    const { icon } = topicData.topic;
 
     return icon;
   }
@@ -96,9 +96,9 @@ class MapComponent extends React.Component {
         onRegionChangeComplete={this.onRegionChange}
       >
         {targets &&
-          targets.map((target, index) => {
+          targets.map((targetData, index) => {
             const key = `marker${index}`;
-            const { lat, lng } = target.target;
+            const { lat, lng, topicId } = targetData.target;
             return (
               <Marker
                 key={key}
@@ -108,7 +108,7 @@ class MapComponent extends React.Component {
                 }}
               >
                 <Image
-                  source={{ uri: this.topicImageWithId(target.target.topicId) }}
+                  source={{ uri: this.topicImageWithId(topicId) }}
                   style={styles.image}
                 />
               </Marker>

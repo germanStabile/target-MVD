@@ -57,8 +57,8 @@ export const getTargetsError = () => ({
 
 export const getTargets = () => (dispatch) => {
   dispatch(startGetTargets());
-  return targetApi.getTargets().then((response) => {
-    dispatch(getTargetsSuccess(response.targets));
+  return targetApi.getTargets().then(({ targets }) => {
+    dispatch(getTargetsSuccess(targets));
   }).catch(() => {
     dispatch(getTargetsError());
   });
