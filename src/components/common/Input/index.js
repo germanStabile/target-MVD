@@ -13,6 +13,7 @@ const Input = ({
   containerStyle,
   keyboardType,
   initialValue,
+  disabled,
   meta: { touched, error }
 }) => (
   <View>
@@ -33,6 +34,8 @@ const Input = ({
           secureTextEntry={password}
           keyboardType={keyboardType}
           defaultValue={initialValue || null}
+          editable={!disabled}
+          selectTextOnFocus={!disabled}
           {...restInput}
         />
         {unit && touched && !error && <Text style={styles.unit}>{unit}</Text>}

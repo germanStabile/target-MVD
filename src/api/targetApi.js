@@ -12,6 +12,10 @@ class Target {
   static getTargets() {
     return api.get('/targets');
   }
+
+  static deleteTarget(targetId) {
+    return api.delete(`/targets/${targetId}`);
+  }
 }
 
 export default Target;

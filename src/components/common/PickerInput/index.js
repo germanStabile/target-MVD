@@ -33,6 +33,10 @@ class PickerInput extends React.Component {
 
   render() {
     const onPress = () => {
+      const { disabled } = this.props;
+      if (disabled) {
+        return
+      }
       picker.show(); // eslint-disable-line no-undef
     };
     const { values, labels, meta, label, input, containerStyle, initialOptionIndex } = this.props;

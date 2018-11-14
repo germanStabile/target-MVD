@@ -69,8 +69,8 @@ class MapComponent extends React.Component {
     this.setState({ region });
   }
 
-  tappedTarget(target) {
-    const { lat, lng } = target.target;
+  tappedTarget(targetData) {
+    const { lat, lng } = targetData.target;
     const { region } = this.state;
     const { selectTarget, changeTargetCoords } = this.props;
     const coords = {
@@ -86,7 +86,7 @@ class MapComponent extends React.Component {
       }
     });
     changeTargetCoords(coords);
-    selectTarget(target);
+    selectTarget(targetData);
   }
 
   topicImageWithId(topicId) {
@@ -122,7 +122,7 @@ class MapComponent extends React.Component {
             return (
               <Marker
                 key={key}
-                onPress={(e) => { e.stopPropagation(); this.tappedTarget(target); }}
+                onPress={(e) => { e.stopPropagation(); this.tappedTarget(targetData); }}
                 coordinate={{
                   latitude: lat,
                   longitude: lng

@@ -4,7 +4,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { object, func, bool, array } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getTopics, createTarget, getTargets, selectTarget, changeTargetCoords } from '../../actions/targetActions';
+import {
+  getTopics,
+  createTarget,
+  getTargets,
+  selectTarget,
+  changeTargetCoords,
+  deleteTarget
+} from '../../actions/targetActions';
 import { newTargetImage, profileIcon, dialogIcon } from '../../image';
 import styles from './styles';
 import NavHeader from '../../components/common/NavHeader';
@@ -29,6 +36,7 @@ class HomeScreen extends React.Component {
     this.onAreaChange = this.onAreaChange.bind(this);
     this.onPositionChange = this.onPositionChange.bind(this);
     this.createTarget = this.createTarget.bind(this);
+    this.targetFormSubmit = this.targetFormSubmit.bind(this);
     this.targetFormFooter = this.targetFormFooter.bind(this);
   }
 
@@ -79,7 +87,7 @@ class HomeScreen extends React.Component {
         <KeyboardAwareScrollView>
           <CreateTargetForm
             initialValues={initialValues}
-            onSubmit={this.createTarget}
+            onSubmit={this.targetFormSubmit}
             topics={topics.map(topic => topic.topic)}
             onAreaChange={this.onAreaChange}
             selectedTarget={selectedTarget}
@@ -95,6 +103,37 @@ class HomeScreen extends React.Component {
         </KeyboardAwareScrollView>
       </View>
     );
+  }
+
+  targetFormSubmit(values) {
+    const { selectedTarget } = this.props;
+
+    if (selectedTarget == null) {
+      this.createTarget(values);
+      return;
+    }
+
+    const { deleteTarget, getTargets, selectTarget } = this.props;
+    const { id } = selectedTarget.target;
+
+    deleteTarget(id).then(() => {
+      selectTarget(null)
+      this.setState({
+        message: 'successfully deleted target'
+      });
+
+      setTimeout(() => {
+        getTargets();
+        this.setState({
+          message: null
+        });
+      }, 2000);
+    }).catch(() => {
+      Alert.alert(
+        'Error deleting target',
+        'Try again!'
+      );
+    });
   }
 
   createTarget(values) {
@@ -206,6 +245,7 @@ HomeScreen.propTypes = {
   isLoading: bool.isRequired,
   selectTarget: func.isRequired,
   changeTargetCoords: func.isRequired,
+  deleteTarget: func.isRequired,
   topics: array,
   selectedTarget: object
 };
@@ -221,7 +261,8 @@ const mapDispatch = dispatch => ({
   createTarget: target => dispatch(createTarget(target)),
   getTargets: () => dispatch(getTargets()),
   selectTarget: target => dispatch(selectTarget(target)),
-  changeTargetCoords: coords => dispatch(changeTargetCoords(coords))
+  changeTargetCoords: coords => dispatch(changeTargetCoords(coords)),
+  deleteTarget: targetId => dispatch(deleteTarget(targetId))
 });
 
 export default connect(mapStateToProps, mapDispatch)(HomeScreen);

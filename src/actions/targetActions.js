@@ -10,7 +10,10 @@ import {
   START_GET_TARGETS,
   GET_TARGETS_SUCCESS,
   GET_TARGETS_ERROR,
-  SELECT_TARGET
+  SELECT_TARGET,
+  START_DELETE_TARGET,
+  DELETE_TARGET_ERROR,
+  DELETE_TARGET_SUCCESS
 } from './actionTypes';
 
 export const startGetTopics = () => ({
@@ -60,6 +63,27 @@ export const selectTarget = target => ({
   target,
   type: SELECT_TARGET
 });
+
+export const startDeleteTarget = () => ({
+  type: START_DELETE_TARGET
+});
+
+export const deleteTargetSuccess = () => ({
+  type: DELETE_TARGET_SUCCESS
+})
+
+export const deleteTargetError = () => ({
+  type: DELETE_TARGET_ERROR
+})
+
+export const deleteTarget = targetId => (dispatch) => {
+  dispatch(startDeleteTarget());
+  return targetApi.deleteTarget(targetId).then(() => {
+    dispatch(deleteTargetSuccess());
+  }).catch(() => {
+    dispatch(deleteTargetError());
+  })
+}
 
 export const getTargets = () => (dispatch) => {
   dispatch(startGetTargets());

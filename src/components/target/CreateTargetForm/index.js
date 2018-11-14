@@ -13,7 +13,9 @@ const CreateTargetForm = ({ handleSubmit, topics, onAreaChange, selectedTarget }
   const topicLabels = topics.map(topic => topic.label);
   let initialPickerIndex = null;
   let initialLabel = null;
+  let submitText = 'SAVE TARGET';
   if (selectedTarget) {
+    submitText = 'DELETE TARGET';
     let i;
     for (i = 0; i < topics.length; i += 1) {
       if (selectedTarget.target.topicId == topics[i].id) {
@@ -32,6 +34,7 @@ const CreateTargetForm = ({ handleSubmit, topics, onAreaChange, selectedTarget }
         containerStyle={styles.field}
         keyboardType="numeric"
         unit="m"
+        disabled={selectedTarget}
         inputStyle={styles.input}
         onChange={onAreaChange}
       />
@@ -40,6 +43,7 @@ const CreateTargetForm = ({ handleSubmit, topics, onAreaChange, selectedTarget }
         label="TARGET TITLE"
         containerStyle={styles.field}
         component={Input}
+        disabled={selectedTarget}
       />
       <Field
         name="topic"
@@ -51,9 +55,12 @@ const CreateTargetForm = ({ handleSubmit, topics, onAreaChange, selectedTarget }
         objectRef={topics}
         initialValue={initialLabel || 'What do you want to talk about?'}
         initialOptionIndex={initialPickerIndex}
+        disabled={selectedTarget}
       />
-      <TouchableOpacity onPress={handleSubmit} style={formStyles.submit}>
-        <Text style={formStyles.submitText}>SAVE TARGET</Text>
+      <TouchableOpacity
+        onPress={handleSubmit}
+        style={[formStyles.submit, selectedTarget && formStyles.delete]}>
+        <Text style={formStyles.submitText}>{submitText}</Text>
       </TouchableOpacity>
     </View>
   );
