@@ -2,23 +2,23 @@ import api from './apiService';
 
 class Session {
   static signUp(user) {
-    return api.post('api/v1/users', user);
+    return api.post('/users', user);
   }
 
   static logOut() {
-    return api.delete('api/v1/users/sign_out');
+    return api.delete('/users/sign_out');
   }
 
   static logIn(user) {
-    return api.post('api/v1/users/sign_in', user);
+    return api.post('/users/sign_in', user);
   }
 
   static requestPasswordReset(email) {
-    return api.post('api/v1/users/password', email);
+    return api.post('/users/password', email);
   }
 
   static editPasswordReset(passwords) {
-    return api.put('api/v1/users/password', passwords);
+    return api.put('/users/password', passwords);
   }
 }
 

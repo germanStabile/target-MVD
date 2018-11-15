@@ -2,11 +2,15 @@ import api from './apiService';
 
 class Target {
   static getTopics() {
-    return api.get('api/v1/topics');
+    return api.get('/topics');
   }
 
   static createTarget(target) {
-    return api.post('api/v1/targets', target);
+    return api.post('/targets', target);
+  }
+
+  static getTargets() {
+    return api.get('/targets');
   }
 }
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import MapView, { Marker, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
 import { array, number, func, bool, object } from 'prop-types';
-import { Alert } from 'react-native';
+import { Alert, Image } from 'react-native';
 import { connect } from 'react-redux';
 
+import styles from './styles';
 import { changeTargetCoords } from '../../../actions/targetActions';
 import { whiteColor, targetYellow } from '../../../constants/styleConstants';
 import { userMarkerImage } from '../../../image';
@@ -16,6 +17,7 @@ class MapComponent extends React.Component {
     this.state = this.getInitialState();
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.topicImageWithId = this.topicImageWithId.bind(this);
   }
 
   getInitialState() {
@@ -66,6 +68,14 @@ class MapComponent extends React.Component {
     this.setState({ region });
   }
 
+  topicImageWithId(topicId) {
+    const { topics } = this.props;
+    const topicData = topics.find(element => element.topic.id === topicId);
+    const { icon } = topicData.topic;
+
+    return icon;
+  }
+
   displayLocationErrorAlert() {
     Alert.alert(
       'Error getting current position',
@@ -75,7 +85,7 @@ class MapComponent extends React.Component {
 
   render() {
     const { region, userCoords } = this.state;
-    const { mapStyle, circleRadius, creatingTarget, targetCoords } = this.props;
+    const { mapStyle, circleRadius, creatingTarget, targetCoords, targets } = this.props;
 
     const newTargetCoords = targetCoords || userCoords;
     return (
@@ -85,6 +95,26 @@ class MapComponent extends React.Component {
         region={region}
         onRegionChangeComplete={this.onRegionChange}
       >
+        {targets &&
+          targets.map((targetData, index) => {
+            const key = `marker${index}`;
+            const { lat, lng, topicId } = targetData.target;
+            return (
+              <Marker
+                key={key}
+                coordinate={{
+                  latitude: lat,
+                  longitude: lng
+                }}
+              >
+                <Image
+                  source={{ uri: this.topicImageWithId(topicId) }}
+                  style={styles.image}
+                />
+              </Marker>
+            );
+          })
+        }
         {userCoords && !creatingTarget &&
           <Marker
             image={userMarkerImage}
@@ -113,16 +143,20 @@ class MapComponent extends React.Component {
 }
 
 MapComponent.propTypes = {
+  targets: array,
   mapStyle: array,
   circleRadius: number,
   onPositionChange: func.isRequired,
   creatingTarget: bool,
   targetCoords: object,
-  changeTargetCoords: func.isRequired
+  changeTargetCoords: func.isRequired,
+  topics: array,
 };
 
 const mapStateToProps = state => ({
   targetCoords: state.getIn(['target', 'targetCoords']),
+  targets: state.getIn(['target', 'targets']),
+  topics: state.getIn(['target', 'topics'])
 });
 
 const mapDispatch = dispatch => ({

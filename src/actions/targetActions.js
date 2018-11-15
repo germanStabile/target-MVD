@@ -6,7 +6,10 @@ import {
   CREATE_TARGET,
   CREATE_TARGET_SUCCESS,
   CREATE_TARGET_ERROR,
-  TARGET_COORDS_CHANGED
+  TARGET_COORDS_CHANGED,
+  START_GET_TARGETS,
+  GET_TARGETS_SUCCESS,
+  GET_TARGETS_ERROR
 } from './actionTypes';
 
 export const startGetTopics = () => ({
@@ -38,6 +41,28 @@ export const changeTargetCoords = coords => ({
   coords,
   type: TARGET_COORDS_CHANGED
 });
+
+export const startGetTargets = () => ({
+  type: START_GET_TARGETS
+});
+
+export const getTargetsSuccess = targets => ({
+  targets,
+  type: GET_TARGETS_SUCCESS
+});
+
+export const getTargetsError = () => ({
+  type: GET_TARGETS_ERROR
+});
+
+export const getTargets = () => (dispatch) => {
+  dispatch(startGetTargets());
+  return targetApi.getTargets().then(({ targets }) => {
+    dispatch(getTargetsSuccess(targets));
+  }).catch(() => {
+    dispatch(getTargetsError());
+  });
+};
 
 export const createTarget = target => (dispatch) => {
   dispatch(startCreateTarget());

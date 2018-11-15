@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { object, func, bool, array } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getTopics, createTarget } from '../../actions/targetActions';
+import { getTopics, createTarget, getTargets } from '../../actions/targetActions';
 import { newTargetImage, profileIcon, dialogIcon } from '../../image';
 import styles from './styles';
 import NavHeader from '../../components/common/NavHeader';
@@ -31,6 +31,13 @@ class HomeScreen extends React.Component {
     this.createTarget = this.createTarget.bind(this);
   }
 
+  componentDidMount() {
+    const { getTargets, getTopics } = this.props;
+    getTopics().then(() => {
+      getTargets();
+    });
+  }
+
   onProfilePress() {
     const { navigator } = this.props;
     navigator.push({
@@ -42,11 +49,8 @@ class HomeScreen extends React.Component {
   }
 
   onCreateTargetPress() {
-    const { getTopics } = this.props;
-    getTopics().then(() => {
-      this.setState({
-        creatingTarget: true
-      });
+    this.setState({
+      creatingTarget: true
     });
   }
 
@@ -79,6 +83,7 @@ class HomeScreen extends React.Component {
       }
     };
     createTarget(target).then(() => {
+      const { getTargets } = this.props;
       this.setState({
         creatingTarget: false,
         circleRadius: null,
@@ -86,6 +91,7 @@ class HomeScreen extends React.Component {
       });
 
       setTimeout(() => {
+        getTargets();
         this.setState({
           message: null
         });
@@ -180,6 +186,7 @@ HomeScreen.propTypes = {
   navigator: object.isRequired,
   getTopics: func.isRequired,
   createTarget: func.isRequired,
+  getTargets: func.isRequired,
   isLoading: bool.isRequired,
   topics: array
 };
@@ -191,7 +198,8 @@ const mapStateToProps = state => ({
 
 const mapDispatch = dispatch => ({
   getTopics: () => dispatch(getTopics()),
-  createTarget: target => dispatch(createTarget(target))
+  createTarget: target => dispatch(createTarget(target)),
+  getTargets: () => dispatch(getTargets())
 });
 
 export default connect(mapStateToProps, mapDispatch)(HomeScreen);
