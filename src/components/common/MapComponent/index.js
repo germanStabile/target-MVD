@@ -71,7 +71,7 @@ class MapComponent extends React.Component {
 
   tappedTarget(targetData) {
     const { lat, lng } = targetData.target;
-    const { region } = this.state;
+    const { longitudeDelta, latitudeDelta } = this.state.region;
     const { selectTarget, changeTargetCoords } = this.props;
     const coords = {
       latitude: lat,
@@ -79,10 +79,9 @@ class MapComponent extends React.Component {
     };
     this.setState({
       region: {
-        latitude: lat,
-        longitude: lng,
-        longitudeDelta: region.longitudeDelta,
-        latitudeDelta: region.latitudeDelta
+        ...coords,
+        longitudeDelta: longitudeDelta,
+        latitudeDelta: latitudeDelta
       }
     });
     changeTargetCoords(coords);

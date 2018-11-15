@@ -8,14 +8,15 @@ import styles from './styles';
 import Input from '../../common/Input';
 import PickerInput from '../../common/PickerInput';
 import { validations, createTarget } from '../../../utils/constraints';
+import { saveTargetText, deleteTargetText } from '../../../constants/text';
 
 const CreateTargetForm = ({ handleSubmit, topics, onAreaChange, selectedTarget }) => {
   const topicLabels = topics.map(topic => topic.label);
   let initialPickerIndex = null;
   let initialLabel = null;
-  let submitText = 'SAVE TARGET';
+  let submitText = saveTargetText;
   if (selectedTarget) {
-    submitText = 'DELETE TARGET';
+    submitText = deleteTargetText;
     let i;
     for (i = 0; i < topics.length; i += 1) {
       if (selectedTarget.target.topicId == topics[i].id) {

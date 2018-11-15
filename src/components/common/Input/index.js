@@ -33,7 +33,7 @@ const Input = ({
           onChangeText={onChange}
           secureTextEntry={password}
           keyboardType={keyboardType}
-          defaultValue={initialValue || null}
+          defaultValue={initialValue}
           editable={!disabled}
           selectTextOnFocus={!disabled}
           {...restInput}
