@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   successMessage: {
     alignSelf: 'center',
     color: greenColor,
-    marginTop: 20
+    marginTop: 50
   }
 });
 

@@ -93,9 +93,10 @@ export const editAccount = (userId, user) => (dispatch) => {
   return userApi.editAccount(userId, user).then(({ user }) => {
     sessionService.saveUser(user).then(() => dispatch(editAccountSuccess()));
   }).catch( error => {
+    const errorMessage = error.errors.email ? emailInUse : error.error;
     dispatch(editAccountError());
     throw new SubmissionError({
-      _error: error.error
+      _error: errorMessage
     });
   });
 };
