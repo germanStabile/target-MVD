@@ -11,7 +11,10 @@ import {
   REQUEST_PASSWORD_RESET,
   EDIT_PASSWORD_RESET,
   EDIT_PASSWORD_RESET_ERROR,
-  EDIT_PASSWORD_RESET_SUCCESS
+  EDIT_PASSWORD_RESET_SUCCESS,
+  START_EDIT_ACCOUNT,
+  EDIT_ACCOUNT_ERROR,
+  EDIT_ACCOUNT_SUCCESS
 } from '../actions/actionTypes';
 
 export const initialState = Immutable.fromJS({
@@ -20,6 +23,8 @@ export const initialState = Immutable.fromJS({
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case EDIT_ACCOUNT_ERROR:
+    case EDIT_ACCOUNT_SUCCESS:
     case LOG_IN_ERROR:
     case LOG_IN_SUCCESS:
     case SIGN_UP_SUCCESS:
@@ -28,6 +33,7 @@ const userReducer = (state = initialState, action) => {
     case EDIT_PASSWORD_RESET_ERROR: {
       return state.set('isLoading', false);
     }
+    case START_EDIT_ACCOUNT:
     case START_LOG_IN:
     case START_SIGN_UP:
     case REQUEST_PASSWORD_RESET:

@@ -15,7 +15,10 @@ import {
   REQUEST_PASSWORD_RESET_SUCCESS,
   EDIT_PASSWORD_RESET,
   EDIT_PASSWORD_RESET_SUCCESS,
-  EDIT_PASSWORD_RESET_ERROR
+  EDIT_PASSWORD_RESET_ERROR,
+  START_EDIT_ACCOUNT,
+  EDIT_ACCOUNT_SUCCESS,
+  EDIT_ACCOUNT_ERROR
 } from './actionTypes';
 import {
   emailInUse,
@@ -73,6 +76,30 @@ export const editPasswordResetError = () => ({
   type: EDIT_PASSWORD_RESET_ERROR
 });
 
+export const startEditAccount = () => ({
+  type: START_EDIT_ACCOUNT
+});
+
+export const editAccountSuccess = () => ({
+  type: EDIT_ACCOUNT_SUCCESS
+});
+
+export const editAccountError = () => ({
+  type: EDIT_ACCOUNT_ERROR
+});
+
+export const editAccount = (userId, user) => (dispatch) => {
+  dispatch(startEditAccount());
+  return userApi.editAccount(userId, user).then(({ user }) => {
+    sessionService.saveUser(user).then(() => dispatch(editAccountSuccess()));
+  }).catch( error => {
+    dispatch(editAccountError());
+    throw new SubmissionError({
+      _error: error.error
+    });
+  });
+};
+
 export const resetPassword = email => (dispatch) => {
   dispatch(requestPasswordReset());
   return userApi.requestPasswordReset({ email, redirect_url: resetPassDeepLink }).then((response) => {
@@ -99,8 +126,8 @@ export const editResetPassword = passwords => (dispatch) => {
 
 export const logIn = user => (dispatch) => {
   dispatch(startLogIn());
-  return userApi.logIn({ user }).then((response) => {
-    sessionService.saveUser(response).then(() => dispatch(logInSuccess()));
+  return userApi.logIn({ user }).then(({ data }) => {
+    sessionService.saveUser(data).then(() => dispatch(logInSuccess()));
   }).catch(() => {
     dispatch(logInError());
     throw new SubmissionError({

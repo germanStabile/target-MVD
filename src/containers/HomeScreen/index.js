@@ -50,7 +50,7 @@ class HomeScreen extends React.Component {
   onProfilePress() {
     const { navigator } = this.props;
     navigator.push({
-      screen: 'target.LoggedInScreen'
+      screen: 'target.EditAccountScreen'
     });
   }
 
