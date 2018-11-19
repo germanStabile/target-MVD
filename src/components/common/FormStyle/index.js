@@ -18,6 +18,9 @@ const formStyles = StyleSheet.create({
     height: 37,
     width: 160,
   },
+  delete: {
+    backgroundColor: redColor
+  },
   submitText: {
     color: whiteColor,
     textAlign: 'center'

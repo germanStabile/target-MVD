@@ -4,7 +4,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { object, func, bool, array } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getTopics, createTarget, getTargets } from '../../actions/targetActions';
+import {
+  getTopics,
+  createTarget,
+  getTargets,
+  selectTarget,
+  changeTargetCoords,
+  deleteTarget
+} from '../../actions/targetActions';
 import { newTargetImage, profileIcon, dialogIcon } from '../../image';
 import styles from './styles';
 import NavHeader from '../../components/common/NavHeader';
@@ -29,6 +36,8 @@ class HomeScreen extends React.Component {
     this.onAreaChange = this.onAreaChange.bind(this);
     this.onPositionChange = this.onPositionChange.bind(this);
     this.createTarget = this.createTarget.bind(this);
+    this.targetFormSubmit = this.targetFormSubmit.bind(this);
+    this.targetFormFooter = this.targetFormFooter.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +72,67 @@ class HomeScreen extends React.Component {
   onAreaChange(value) {
     this.setState({
       circleRadius: Number(value)
+    });
+  }
+
+  targetFormFooter() {
+    const { topics, selectedTarget } = this.props;
+    const { message } = this.state;
+    const initialValues = selectedTarget ? {
+      title: selectedTarget.target.title,
+      areaLength: selectedTarget.target.radius.toString(),
+    } : {};
+    return (
+      <View style={styles.createTargetFooter}>
+        <KeyboardAwareScrollView>
+          <CreateTargetForm
+            initialValues={initialValues}
+            onSubmit={this.targetFormSubmit}
+            topics={topics.map(topic => topic.topic)}
+            onAreaChange={this.onAreaChange}
+            selectedTarget={selectedTarget}
+          />
+          <View style={styles.divider} />
+          <TouchableOpacity
+            onPress={this.cancelCreateTarget}
+            style={styles.cancelCreateTarget}
+          >
+            <Text style={styles.centeredText}>CANCEL</Text>
+          </TouchableOpacity>
+          {message && <Text style={styles.centeredText}>{message}</Text>}
+        </KeyboardAwareScrollView>
+      </View>
+    );
+  }
+
+  targetFormSubmit(values) {
+    const { selectedTarget } = this.props;
+
+    if (selectedTarget == null) {
+      this.createTarget(values);
+      return;
+    }
+
+    const { deleteTarget, getTargets, selectTarget } = this.props;
+    const { id } = selectedTarget.target;
+
+    deleteTarget(id).then(() => {
+      selectTarget(null)
+      this.setState({
+        message: 'successfully deleted target'
+      });
+
+      setTimeout(() => {
+        getTargets();
+        this.setState({
+          message: null
+        });
+      }, 2000);
+    }).catch(() => {
+      Alert.alert(
+        'Error deleting target',
+        'Try again!'
+      );
     });
   }
 
@@ -105,6 +175,9 @@ class HomeScreen extends React.Component {
   }
 
   cancelCreateTarget() {
+    const { selectTarget, changeTargetCoords } = this.props;
+    selectTarget(null);
+    changeTargetCoords(null);
     this.setState({
       creatingTarget: false,
       circleRadius: null
@@ -133,7 +206,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const { creatingTarget, circleRadius, message } = this.state;
-    const { isLoading, topics } = this.props;
+    const { isLoading, selectedTarget } = this.props;
 
     return (
       <View style={styles.container}>
@@ -148,7 +221,7 @@ class HomeScreen extends React.Component {
           onPositionChange={this.onPositionChange}
           creatingTarget={creatingTarget}
         />
-        {!creatingTarget &&
+        {!creatingTarget && !selectedTarget &&
           <View style={styles.footer}>
             <TouchableOpacity onPress={this.onCreateTargetPress}>
               <Image source={newTargetImage} style={styles.centeredImage} />
@@ -157,25 +230,7 @@ class HomeScreen extends React.Component {
             {message && <Text style={styles.centeredText}>{message}</Text>}
           </View>
         }
-        {creatingTarget &&
-          <View style={styles.createTargetFooter}>
-            <KeyboardAwareScrollView>
-              <CreateTargetForm
-                onSubmit={this.createTarget}
-                topics={topics.map(topic => topic.topic)}
-                onAreaChange={this.onAreaChange}
-              />
-              <View style={styles.divider} />
-              <TouchableOpacity
-                onPress={this.cancelCreateTarget}
-                style={styles.cancelCreateTarget}
-              >
-                <Text style={styles.centeredText}>CANCEL</Text>
-              </TouchableOpacity>
-              {message && <Text style={styles.centeredText}>{message}</Text>}
-            </KeyboardAwareScrollView>
-          </View>
-        }
+        {(creatingTarget || selectedTarget) && this.targetFormFooter(creatingTarget) }
         {isLoading && <Loader /> }
       </View>
     );
@@ -188,18 +243,26 @@ HomeScreen.propTypes = {
   createTarget: func.isRequired,
   getTargets: func.isRequired,
   isLoading: bool.isRequired,
-  topics: array
+  selectTarget: func.isRequired,
+  changeTargetCoords: func.isRequired,
+  deleteTarget: func.isRequired,
+  topics: array,
+  selectedTarget: object
 };
 
 const mapStateToProps = state => ({
   isLoading: state.getIn(['target', 'isLoading']),
-  topics: state.getIn(['target', 'topics'])
+  topics: state.getIn(['target', 'topics']),
+  selectedTarget: state.getIn(['target', 'selectedTarget'])
 });
 
 const mapDispatch = dispatch => ({
   getTopics: () => dispatch(getTopics()),
   createTarget: target => dispatch(createTarget(target)),
-  getTargets: () => dispatch(getTargets())
+  getTargets: () => dispatch(getTargets()),
+  selectTarget: target => dispatch(selectTarget(target)),
+  changeTargetCoords: coords => dispatch(changeTargetCoords(coords)),
+  deleteTarget: targetId => dispatch(deleteTarget(targetId))
 });
 
 export default connect(mapStateToProps, mapDispatch)(HomeScreen);

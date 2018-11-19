@@ -12,6 +12,8 @@ const Input = ({
   inputStyle,
   containerStyle,
   keyboardType,
+  initialValue,
+  disabled,
   meta: { touched, error }
 }) => (
   <View>
@@ -31,6 +33,9 @@ const Input = ({
           onChangeText={onChange}
           secureTextEntry={password}
           keyboardType={keyboardType}
+          defaultValue={initialValue}
+          editable={!disabled}
+          selectTextOnFocus={!disabled}
           {...restInput}
         />
         {unit && touched && !error && <Text style={styles.unit}>{unit}</Text>}
@@ -48,7 +53,8 @@ Input.propTypes = {
   containerStyle: number,
   keyboardType: string,
   unit: string,
-  inputStyle: number
+  inputStyle: number,
+  initialValue: string
 };
 
 export default Input;
