@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-import { blackColor, greenColor } from '../../constants/styleConstants';
+import {
+  blackColor,
+  greenColor,
+  profileBackgroundSize,
+  profileBubbleMargin
+} from '../../constants/styleConstants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  header: {
-    height: 260,
-    marginTop: -50,
-    marginBottom: -150
   },
   disabledForm: {
     opacity: 0.2
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 0.5,
-    width: 121,
+    width: '40%',
     backgroundColor: blackColor,
     marginTop: 40,
     alignSelf: 'center',
@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
   },
   headerBackground: {
     width: 205,
+    height: 145,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 145,
-    marginBottom: -103,
+    marginBottom: -(profileBackgroundSize + profileBubbleMargin),
     alignSelf: 'center',
-    marginRight: 81,
+    marginRight: profileBackgroundSize,
     marginTop:30
   },
   headerImage: {
@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   profileBackground: {
-    width: 83,
+    width: profileBackgroundSize,
+    height: profileBackgroundSize,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 83,
     alignSelf: 'center',
   },
   profileImage: {
