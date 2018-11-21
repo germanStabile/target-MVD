@@ -11,11 +11,11 @@ import Loader from '../../components/common/Loader';
 import { signUp } from '../../actions/userActions';
 
 class CreateAccountScreen extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+      super(props);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
     handleSubmit = (values) => {
       const { signUp } = this.props;

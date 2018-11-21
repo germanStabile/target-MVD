@@ -77,5 +77,15 @@ export const createAccount = {
   }
 };
 
+export const editAccount = {
+  username: {
+    presence: { message: 'you forgot to put your name' }
+  },
+  email: {
+    presence: { message: 'oops, this email is not valid' },
+    email: { message: 'oops, this email is not valid' }
+  }
+};
+
 export const validations = constraints => data => validate(data.toJS(),
   constraints, { fullMessages: false }) || {};

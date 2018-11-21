@@ -20,6 +20,10 @@ class Session {
   static editPasswordReset(passwords) {
     return api.put('/users/password', passwords);
   }
+
+  static editAccount(userId, user) {
+    return api.put(`/users/${userId}`, user)
+  }
 }
 
 export default Session;
