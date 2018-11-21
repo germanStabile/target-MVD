@@ -9,7 +9,7 @@ import formStyles from '../../common/FormStyle';
 import { validations, editAccount } from '../../../utils/constraints';
 import PickerInput from '../../common/PickerInput';
 
-const EditAccountForm = ({ handleSubmit, containerStyle, error }) => (
+const EditAccountForm = ({ handleSubmit, containerStyle, error, changePasswordTapped }) => (
   <View onSubmit={handleSubmit} style={[styles.container, ...containerStyle]}>
     <Field
       name="username"
@@ -21,7 +21,7 @@ const EditAccountForm = ({ handleSubmit, containerStyle, error }) => (
       label="EMAIL"
       component={Input}
     />
-    <TouchableOpacity style={styles.changePassword}>
+    <TouchableOpacity onPress={changePasswordTapped} style={styles.changePassword}>
       <Text>CHANGE PASSWORD</Text>
     </TouchableOpacity>
     <TouchableOpacity onPress={handleSubmit} style={styles.submit}>
@@ -33,6 +33,7 @@ const EditAccountForm = ({ handleSubmit, containerStyle, error }) => (
 
 EditAccountForm.propTypes = {
   handleSubmit: func.isRequired,
+  changePasswordTapped: func.isRequired,
   containerStyle: array,
   error: string
 };
