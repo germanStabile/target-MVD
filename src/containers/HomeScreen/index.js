@@ -10,7 +10,8 @@ import {
   getTargets,
   selectTarget,
   changeTargetCoords,
-  deleteTarget
+  deleteTarget,
+  matchFound
 } from '../../actions/targetActions';
 import { newTargetImage, profileIcon, dialogIcon } from '../../image';
 import styles from './styles';
@@ -29,6 +30,7 @@ class HomeScreen extends React.Component {
       creatingTarget: false,
       circleRadius: null
     };
+    this.onSkipMatch = this.onSkipMatch.bind(this);
     this.onProfilePress = this.onProfilePress.bind(this);
     this.profileButton = this.profileButton.bind(this);
     this.onCreateTargetPress = this.onCreateTargetPress.bind(this);
@@ -56,6 +58,11 @@ class HomeScreen extends React.Component {
   }
 
   onChatPress() {
+  }
+
+  onSkipMatch() {
+    const { matchFound } = this.props;
+    matchFound(null);
   }
 
   onCreateTargetPress() {
@@ -216,7 +223,12 @@ class HomeScreen extends React.Component {
           leftChild={this.profileButton()}
           rightChild={this.chatButton()}
         />
-        <MatchFoundComponent />
+        {foundMatch &&
+          <MatchFoundComponent
+            foundMatch={foundMatch}
+            skipMatch={this.onSkipMatch}
+          />
+        }
         <MapComponent
           mapStyle={[styles.map]}
           circleRadius={circleRadius}
@@ -248,6 +260,7 @@ HomeScreen.propTypes = {
   selectTarget: func.isRequired,
   changeTargetCoords: func.isRequired,
   deleteTarget: func.isRequired,
+  matchFound: func.isRequired,
   foundMatch: object,
   topics: array,
   selectedTarget: object
@@ -266,7 +279,8 @@ const mapDispatch = dispatch => ({
   getTargets: () => dispatch(getTargets()),
   selectTarget: target => dispatch(selectTarget(target)),
   changeTargetCoords: coords => dispatch(changeTargetCoords(coords)),
-  deleteTarget: targetId => dispatch(deleteTarget(targetId))
+  deleteTarget: targetId => dispatch(deleteTarget(targetId)),
+  matchFound: match => dispatch(matchFound(match))
 });
 
 export default connect(mapStateToProps, mapDispatch)(HomeScreen);

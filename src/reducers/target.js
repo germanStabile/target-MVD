@@ -56,7 +56,6 @@ const targetReducer = (state = initialState, action) => {
       return state.set('selectedTarget', action.target);
     }
     case MATCH_FOUND: {
-      debugger;
       return state.set('foundMatch', action.matchedUser);
     }
     default: {

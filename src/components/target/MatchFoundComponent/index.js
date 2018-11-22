@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import { func, bool, object } from 'prop-types';
 
+import { matchFoundHeader, profileIcon } from '../../../image';
 import styles from './styles.js';
 
 export default class MatchFoundComponent extends React.Component {
@@ -11,7 +12,8 @@ export default class MatchFoundComponent extends React.Component {
   }
 
   render() {
-    const { skipMatch } = this.props;
+    const { skipMatch, foundMatch: { username }} = this.props;
+
     return (
       <Modal
         animationType="slide"
@@ -19,11 +21,29 @@ export default class MatchFoundComponent extends React.Component {
         visible={true} >
         <View style={styles.outerModal}>
           <View style={styles.modal}>
+            <ImageBackground
+              source={matchFoundHeader}
+              style={styles.headerBackground}
+              imageStyle={styles.headerImage}
+            />
+            <Text style={styles.yayText}>Yay!</Text>
+            <Text style={styles.newMatchText}>You have a new match!</Text>
+            <View style={styles.matchProfileView}>
+              <ImageBackground
+                source={profileIcon}
+                style={styles.matchProfileBackground}
+                imageStyle={styles.matchProfileImage}
+              />
+              <Text style={styles.matchProfileText}>{username}</Text>
+            </View>
+            <TouchableOpacity style={styles.startChatButton}>
+              <Text style={styles.startChatText}>Cool! Start chatting</Text>
+            </TouchableOpacity>
             <TouchableOpacity
-              onPress={this.skipMatch}
+              onPress={skipMatch}
               style={styles.skipMatch}
             >
-              <Text>Skip</Text>
+              <Text style={styles.skipText}>Skip</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -34,4 +54,5 @@ export default class MatchFoundComponent extends React.Component {
 
 MatchFoundComponent.propTypes = {
   skipMatch: func.isRequired,
+  foundMatch: object.isRequired
 };

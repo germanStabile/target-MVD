@@ -104,10 +104,10 @@ export const createTarget = target => (dispatch) => {
   dispatch(startCreateTarget());
   return targetApi.createTarget(target).then((response) => {
     const { matchedUser } = response;
+    dispatch(createTargetSuccess());
     if (matchedUser) {
       dispatch(matchFound(matchedUser));
     }
-    dispatch(createTargetSuccess());
   }).catch((err) => {
     dispatch(createTargetError());
     throw err;
