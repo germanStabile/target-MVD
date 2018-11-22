@@ -13,7 +13,8 @@ import {
   SELECT_TARGET,
   START_DELETE_TARGET,
   DELETE_TARGET_ERROR,
-  DELETE_TARGET_SUCCESS
+  DELETE_TARGET_SUCCESS,
+  MATCH_FOUND
 } from './actionTypes';
 
 export const startGetTopics = () => ({
@@ -70,10 +71,15 @@ export const startDeleteTarget = () => ({
 
 export const deleteTargetSuccess = () => ({
   type: DELETE_TARGET_SUCCESS
-})
+});
 
 export const deleteTargetError = () => ({
   type: DELETE_TARGET_ERROR
+});
+
+export const matchFound = matchedUser => ({
+  matchedUser,
+  type: MATCH_FOUND
 })
 
 export const deleteTarget = targetId => (dispatch) => {
@@ -96,7 +102,11 @@ export const getTargets = () => (dispatch) => {
 
 export const createTarget = target => (dispatch) => {
   dispatch(startCreateTarget());
-  return targetApi.createTarget(target).then(() => {
+  return targetApi.createTarget(target).then((response) => {
+    const { matchedUser } = response;
+    if (matchedUser) {
+      dispatch(matchFound(matchedUser));
+    }
     dispatch(createTargetSuccess());
   }).catch((err) => {
     dispatch(createTargetError());

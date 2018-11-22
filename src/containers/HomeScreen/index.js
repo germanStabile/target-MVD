@@ -14,6 +14,7 @@ import {
 } from '../../actions/targetActions';
 import { newTargetImage, profileIcon, dialogIcon } from '../../image';
 import styles from './styles';
+import MatchFoundComponent from '../../components/target/MatchFoundComponent';
 import NavHeader from '../../components/common/NavHeader';
 import MapComponent from '../../components/common/MapComponent';
 import IconButton from '../../components/common/IconButton';
@@ -206,7 +207,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const { creatingTarget, circleRadius, message } = this.state;
-    const { isLoading, selectedTarget } = this.props;
+    const { isLoading, selectedTarget, foundMatch } = this.props;
 
     return (
       <View style={styles.container}>
@@ -215,6 +216,7 @@ class HomeScreen extends React.Component {
           leftChild={this.profileButton()}
           rightChild={this.chatButton()}
         />
+        <MatchFoundComponent />
         <MapComponent
           mapStyle={[styles.map]}
           circleRadius={circleRadius}
@@ -246,6 +248,7 @@ HomeScreen.propTypes = {
   selectTarget: func.isRequired,
   changeTargetCoords: func.isRequired,
   deleteTarget: func.isRequired,
+  foundMatch: object,
   topics: array,
   selectedTarget: object
 };
@@ -253,7 +256,8 @@ HomeScreen.propTypes = {
 const mapStateToProps = state => ({
   isLoading: state.getIn(['target', 'isLoading']),
   topics: state.getIn(['target', 'topics']),
-  selectedTarget: state.getIn(['target', 'selectedTarget'])
+  selectedTarget: state.getIn(['target', 'selectedTarget']),
+  foundMatch: state.getIn(['target', 'foundMatch'])
 });
 
 const mapDispatch = dispatch => ({
