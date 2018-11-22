@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   labelContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginHorizontal: 40
+  },
+  nameLabel: {
+    textAlign: 'center'
   },
   errorText: {
     color: redColor

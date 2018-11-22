@@ -27,6 +27,30 @@ export const resetPassword = {
   }
 };
 
+export const editPassword = {
+  currentPassword: {
+    presence: { message: 'the password must be at least 8 characters long' },
+    length: {
+      minimum: 8,
+      message: 'the password must be at least 8 characters long'
+    }
+  },
+  newPassword: {
+    presence: { message: 'the password must be at least 8 characters long' },
+    length: {
+      minimum: 8,
+      message: 'the password must be at least 8 characters long'
+    }
+  },
+  passwordConfirmation: {
+    presence: true,
+    equality: {
+      attribute: 'password',
+      message: 'passwords don\'t match'
+    }
+  }
+};
+
 export const createTarget = {
   areaLength: {
     presence: { message: 'you forgot to set an area length' },

@@ -18,7 +18,7 @@ const Input = ({
 }) => (
   <View>
     <View style={styles.labelContainer}>
-      {label && <Text>{label}</Text>}
+      {label && <Text style={styles.nameLabel}>{label}</Text>}
     </View>
     <View style={styles.inputErrorLabelContainer}>
       <View

@@ -22,7 +22,7 @@ class Session {
   }
 
   static editAccount(userId, user) {
-    return api.put(`/users/${userId}`, user)
+    return api.put(`/users/${userId}`, user);
   }
 }
 
