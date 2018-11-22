@@ -30,9 +30,8 @@ class EditAccountScreen extends React.Component {
         showPasswordModal: false
       };
       this.submittedNewPassword = this.submittedNewPassword.bind(this);
-      this.closePasswordModal = this.closePasswordModal.bind(this);
+      this.togglePasswordModal = this.togglePasswordModal.bind(this);
       this.changePasswordView = this.changePasswordView.bind(this);
-      this.changePasswordTapped = this.changePasswordTapped.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.logOutButtonTapped = this.logOutButtonTapped.bind(this);
     }
@@ -52,15 +51,10 @@ class EditAccountScreen extends React.Component {
       });
     }
 
-    changePasswordTapped() {
+    togglePasswordModal(visible) {
+      const { showPasswordModal } = this.state;
       this.setState({
-        showPasswordModal: true
-      });
-    }
-
-    closePasswordModal() {
-      this.setState({
-        showPasswordModal: false
+        showPasswordModal: !showPasswordModal
       });
     }
 
@@ -96,7 +90,7 @@ class EditAccountScreen extends React.Component {
                 containerStyle={isLoading ? [styles.disabledForm] : []}
               />
               <TouchableOpacity
-                onPress={this.closePasswordModal}
+                onPress={this.togglePasswordModal}
                 style={styles.cancelEditPassword}
               >
                 <Text>CANCEL</Text>
@@ -138,7 +132,7 @@ class EditAccountScreen extends React.Component {
             <EditAccountForm
               initialValues={initialValues}
               onSubmit={this.handleSubmit}
-              changePasswordTapped={this.changePasswordTapped}
+              changePasswordTapped={this.togglePasswordModal}
               containerStyle={isLoading ? [styles.disabledForm] : []}
             />
             <View style={styles.divider} />

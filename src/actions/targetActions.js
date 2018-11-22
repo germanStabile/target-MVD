@@ -80,7 +80,7 @@ export const deleteTargetError = () => ({
 export const matchFound = matchedUser => ({
   matchedUser,
   type: MATCH_FOUND
-})
+});
 
 export const deleteTarget = targetId => (dispatch) => {
   dispatch(startDeleteTarget());
