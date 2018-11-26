@@ -13,7 +13,8 @@ import {
   SELECT_TARGET,
   DELETE_TARGET_ERROR,
   DELETE_TARGET_SUCCESS,
-  START_DELETE_TARGET
+  START_DELETE_TARGET,
+  MATCH_FOUND
 } from '../actions/actionTypes';
 
 export const initialState = Immutable.fromJS({
@@ -53,6 +54,9 @@ const targetReducer = (state = initialState, action) => {
     }
     case SELECT_TARGET: {
       return state.set('selectedTarget', action.target);
+    }
+    case MATCH_FOUND: {
+      return state.set('foundMatch', action.matchedUser);
     }
     default: {
       return state;
