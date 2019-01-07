@@ -22,19 +22,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20
   },
-  headerBackground: {
+  headerImage: {
     width: 133,
     height: 78,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
     marginBottom: 20,
-    marginTop:30
-  },
-  headerImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    alignSelf: 'flex-start'
+    marginTop: 30,
+    alignSelf: 'center'
   },
   startChatButton: {
     backgroundColor: targetYellow,
@@ -66,22 +59,16 @@ const styles = StyleSheet.create({
   matchProfileView: {
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'center',
+    justifyContent:'flex-start',
     height: 40,
     marginHorizontal: 45,
     marginBottom: 20
   },
-  matchProfileImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    alignSelf: 'flex-start'
-  },
   matchProfileBackground: {
     width: 30,
     height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10
+    marginRight: 10,
+    alignSelf: 'center'
   },
   matchProfileText: {
     fontSize: 19,

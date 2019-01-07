@@ -6,3 +6,6 @@ export const dialogIcon = require('./dialog-icon.png');
 export const profileBubbleGroup = require('./profile-bubble-group.png');
 export const profileIconBig = require('./profile-icon-big.png');
 export const matchFoundHeader = require('./match-found-header.png')
+export const mapIcon = require('./map-icon.png');
+export const chatCircle = require('./chat-circle.png');
+export const defaultTopicIcon = require('./default-topic-icon.png');
