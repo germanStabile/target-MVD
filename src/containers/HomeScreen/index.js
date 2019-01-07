@@ -30,6 +30,7 @@ class HomeScreen extends React.Component {
       creatingTarget: false,
       circleRadius: null
     };
+    this.onChatPress = this.onChatPress.bind(this);
     this.onSkipMatch = this.onSkipMatch.bind(this);
     this.onProfilePress = this.onProfilePress.bind(this);
     this.profileButton = this.profileButton.bind(this);
@@ -58,6 +59,13 @@ class HomeScreen extends React.Component {
   }
 
   onChatPress() {
+    const { navigator } = this.props;
+    navigator.push({
+      screen: 'target.ConversationsScreen',
+      navigatorStyle: {
+        navBarHidden: true
+      }
+    });
   }
 
   onSkipMatch() {

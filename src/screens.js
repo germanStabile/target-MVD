@@ -6,6 +6,7 @@ import EditAccountScreen from './containers/EditAccountScreen';
 import HomeScreen from './containers/HomeScreen';
 import ForgotPasswordScreen from './containers/ForgotPasswordScreen';
 import ResetPasswordScreen from './containers/ResetPasswordScreen';
+import ConversationsScreen from './containers/ConversationsScreen';
 
 const registerScreens = (store, Provider) => {
   Navigation.registerComponent('target.LoginScreen', () => LoginScreen, store, Provider);
@@ -14,6 +15,7 @@ const registerScreens = (store, Provider) => {
   Navigation.registerComponent('target.HomeScreen', () => HomeScreen, store, Provider);
   Navigation.registerComponent('target.ForgotPasswordScreen', () => ForgotPasswordScreen, store, Provider);
   Navigation.registerComponent('target.ResetPasswordScreen', () => ResetPasswordScreen, store, Provider);
+  Navigation.registerComponent('target.ConversationsScreen', () => ConversationsScreen, store, Provider);
 };
 
 export default registerScreens;
